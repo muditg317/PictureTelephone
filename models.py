@@ -11,6 +11,7 @@ class Caption(ThreadContent):
 
 class User(ndb.Model):
     username = ndb.StringProperty(required=True)
+    id = ndb.IntegerProperty(required=True)
 
 class Thread(ndb.Model):
     thread_id = ndb.IntegerProperty(required=True)
@@ -18,5 +19,6 @@ class Thread(ndb.Model):
     captions = ndb.KeyProperty(Caption,repeated=True)
 
 class Edit(ndb.Model):
-    addtion = ndb.KeyProperty(ThreadContent)
     user = ndb.KeyProperty(User)
+    thread = ndb.KeyProperty(Thread)
+    addtion = ndb.KeyProperty(ThreadContent)
