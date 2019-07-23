@@ -9,9 +9,15 @@ class Drawing(ThreadContent):
 class Caption(ThreadContent):
     content = ndb.StringProperty(required=True)
 
-class User(ndb.Model):
+class TeleUser(ndb.Model):
     username = ndb.StringProperty(required=True)
-    id = ndb.IntegerProperty(required=True)
+
+    @staticmethod
+    def fromGSI(user):
+        email = user.nickname()
+        username = email[:email.index("@")]
+        teleUser = TeleUser(username=username,id=user.user_id())
+        return teleUser
 
 class Thread(ndb.Model):
     thread_id = ndb.IntegerProperty(required=True)
@@ -19,6 +25,6 @@ class Thread(ndb.Model):
     captions = ndb.KeyProperty(Caption,repeated=True)
 
 class Edit(ndb.Model):
-    user = ndb.KeyProperty(User)
+    user = ndb.KeyProperty(TeleUser)
     thread = ndb.KeyProperty(Thread)
     addtion = ndb.KeyProperty(ThreadContent)

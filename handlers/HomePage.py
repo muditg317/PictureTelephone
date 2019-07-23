@@ -2,7 +2,7 @@ import webapp2
 import jinja2
 import os
 from google.appengine.api import users,images
-from models import ThreadContent,Drawing,Caption,User,Thread,Edit
+from models import ThreadContent,Drawing,Caption,TeleUser,Thread,Edit
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)+"/../templates/"),
@@ -15,7 +15,14 @@ class HomePage(webapp2.RequestHandler):
         if not user:
             self.redirect("/welcome")
         else:
+            teleUser = TeleUser.get_by_id(user.user_id())
+            print teleUser
+            if not teleUser:
+                teleUser = TeleUser.fromGSI(user=user)
+                print teleUser
+                teleUser.put()
             home_template = the_jinja_env.get_template("home.html")
             self.response.write(home_template.render({
-                "user_info":user
+                "user_info":teleUser,
+                "logout_url":users.create_logout_url("/welcome")
             }))
