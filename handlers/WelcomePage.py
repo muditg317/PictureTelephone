@@ -16,7 +16,6 @@ class WelcomePage(webapp2.RequestHandler):
             teleUser = TeleUser.get_by_id(user.user_id())
             if not teleUser:
                 teleUser = TeleUser.fromGSI(user=user)
-                print teleUser
                 teleUser.put()
             self.redirect("/home")
         else:

@@ -11,6 +11,7 @@ class Caption(ThreadContent):
 
 class TeleUser(ndb.Model):
     username = ndb.StringProperty(required=True)
+    # email = ndb.StringProperty(required=True)
 
     @staticmethod
     def fromGSI(user):
@@ -25,6 +26,6 @@ class Thread(ndb.Model):
     captions = ndb.KeyProperty(Caption,repeated=True)
 
 class Edit(ndb.Model):
-    user = ndb.KeyProperty(TeleUser)
-    thread = ndb.KeyProperty(Thread)
-    addtion = ndb.KeyProperty(ThreadContent)
+    user = ndb.KeyProperty(TeleUser,required=True)
+    thread = ndb.KeyProperty(Thread,required=True)
+    addition = ndb.KeyProperty(required=True)

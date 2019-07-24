@@ -9,12 +9,10 @@
       <form action="/confirmation"
               enctype="multipart/form-data"
               method="post">
-          <div>
-            <textarea name="content" rows="3" cols="60"></textarea>
-          </div>
-          <div><label>Avatar:</label></div>
-          <div><input type="file" name="img"/></div>
-          <div><input type="submit" value="Sign Guestbook"></div>
+          <textarea name="caption" rows="3" cols="60"></textarea>
+          <input type="text" name="request_type" value="drawing">
+          <div><input type="file" name="drawing"/></div>
+          <div><input type="submit" value="submit"></div>
       </form>
       <hr>
       <form>Guestbook name: <input value="%s" name="guestbook_name">
