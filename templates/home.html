@@ -17,7 +17,7 @@
       <div class='carousel'>
         <!-- Insert Carosuel Here -->
         {% for thread in threads %}
-          thread id: {{thread.thread_id}}<br>
+          thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
           {% for edit in edits %}
             {% if edit.thread == thread.key %}
               <!-- edit:{{edit.key.id()}}<br> -->
@@ -36,6 +36,6 @@
       </div>
     </div>
     <a href="{{logout_url}}">log out</a>
-    <a href="/edit">edit</a>
+    <!-- <a href="/edit">edit</a> -->
   </body>
 </html>

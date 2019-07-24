@@ -22,8 +22,12 @@ class HomePage(webapp2.RequestHandler):
             home_template = the_jinja_env.get_template("home.html")
             thread_entity_list = Thread.query().fetch()
             edit_entity_list = Edit.query().fetch()
-            drawing_entity_list = Drawing.query().fetch()
-            caption_entity_list = Caption.query().fetch()
+            if edit_entity_list:
+                edit_entity_list.sort(key=lambda x: x.addition.get().date)
+            drawing_entity_list = Drawing.query().order(Drawing.date).fetch()
+            # drawing_entity_list.sort(key=lambda x: x.date)
+            caption_entity_list = Caption.query().order(Caption.date).fetch()
+            # caption_entity_list.sort(key=lambda x: x.date)
             self.response.write(home_template.render({
                 "user_info":teleUser,
                 "logout_url":users.create_logout_url("/welcome"),

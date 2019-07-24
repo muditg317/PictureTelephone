@@ -23,6 +23,7 @@ class ConfirmationPage(webapp2.RequestHandler):
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
             edit_type = self.request.get("request_type")
+            print self.request.get("thread_id")
             thread_id = int(self.request.get("thread_id"))
             thread_entity_list = Thread.query().filter(Thread.thread_id==thread_id).fetch()
             if thread_entity_list:

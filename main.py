@@ -8,6 +8,7 @@ from handlers.EditPage import EditPage
 from handlers.HomePage import HomePage
 from handlers.WelcomePage import WelcomePage
 from handlers.EditDrawingPage import EditDrawingPage
+from handlers.EditCaptionPage import EditCaptionPage
 from handlers.TestPage import TestPage
 from handlers.DrawingsHandler import DrawingsHandler
 from seed_teleDrawing_db import seed_db
@@ -27,6 +28,7 @@ app = webapp2.WSGIApplication([
     ("/home", HomePage),
     ("/welcome", WelcomePage),
     ('/edit-drawing', EditDrawingPage),
+    ('/edit-caption', EditCaptionPage),
     ('/test', TestPage),
     ("/drawings",DrawingsHandler),
 ], debug=True)
