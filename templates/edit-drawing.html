@@ -7,6 +7,7 @@
 <html>
   <head>
     <title>Edit The Thread</title>
+    <link rel="stylesheet" href="../static/css/edit-drawing.css"/>
   </head>
   <body onload="init()">
     <div class="top-half" id='caption'>
@@ -14,10 +15,8 @@
     </div>
     <div class='bottom-half' id="Canvas">
       <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
-      <canvas id="canvas" height="300" width="400"></canvas>
-      <!-- <form class="" action=".html" method="post">  //Add the url of the confirmation page
-        <input type='submit'value='Add to thread'>
-      </form> -->
+      <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
+      <p onClick='saveImage()'><a href='/test'>Submit!</a></p>
     </div>
     <script src='../static/scripts/edit.js'>
     </script>

@@ -9,13 +9,13 @@ the_jinja_env = jinja2.Environment(
     extensions=["jinja2.ext.autoescape"],
     autoescape=True)
 
-class EditDrawingPage(webapp2.RequestHandler):
+class TestPage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if not user:
             self.redirect("/welcome")
         else:
-            edit_template = the_jinja_env.get_template("edit-drawing.html")
+            edit_template = the_jinja_env.get_template("test.html")
             self.response.write(edit_template.render({
                 "user_info":user
             }))
