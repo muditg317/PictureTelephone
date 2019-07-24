@@ -6,6 +6,7 @@ from handlers.CreatePage import CreatePage
 from handlers.EditPage import EditPage
 from handlers.HomePage import HomePage
 from handlers.WelcomePage import WelcomePage
+from handlers.EditDrawingPage import EditDrawingPage
 
 
 app = webapp2.WSGIApplication([
@@ -14,4 +15,5 @@ app = webapp2.WSGIApplication([
     ("/edit", EditPage),
     ("/home", HomePage),
     ("/welcome", WelcomePage),
+    ('/edit-drawing', EditDrawingPage),
 ], debug=True)
