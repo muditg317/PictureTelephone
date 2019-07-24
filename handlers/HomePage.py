@@ -20,10 +20,15 @@ class HomePage(webapp2.RequestHandler):
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
             home_template = the_jinja_env.get_template("home.html")
-            thread_entity = Thread.query().fetch()[0]
-            edits = Edit.query().fetch()
-
+            thread_entity_list = Thread.query().fetch()
+            edit_entity_list = Edit.query().fetch()
+            drawing_entity_list = Drawing.query().fetch()
+            caption_entity_list = Caption.query().fetch()
             self.response.write(home_template.render({
                 "user_info":teleUser,
-                "logout_url":users.create_logout_url("/welcome")
+                "logout_url":users.create_logout_url("/welcome"),
+                "threads":thread_entity_list,
+                "edits":edit_entity_list,
+                "drawings":drawing_entity_list,
+                "captions":caption_entity_list
             }))

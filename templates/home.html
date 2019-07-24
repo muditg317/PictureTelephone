@@ -16,8 +16,26 @@
     <div class="main_body">
       <div class='carousel'>
         <!-- Insert Carosuel Here -->
+        {% for thread in threads %}
+          thread id: {{thread.thread_id}}<br>
+          {% for edit in edits %}
+            {% if edit.thread == thread.key %}
+              <!-- edit:{{edit.key.id()}}<br> -->
+              {% set kind = edit.addition.kind() %}
+              {{kind}}:
+              {% if kind=="Caption"%}
+                {{edit.addition.get().content}}
+              {% else %}
+                <!-- {{edit.addition}} -->
+                <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+              {% endif %}<br>
+            {% endif %}
+          {% endfor %}
+          <br>
+        {% endfor %}
       </div>
     </div>
     <a href="{{logout_url}}">log out</a>
+    <a href="/edit">edit</a>
   </body>
 </html>
