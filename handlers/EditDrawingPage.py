@@ -15,7 +15,7 @@ class EditPage(webapp2.RequestHandler):
         if not user:
             self.redirect("/welcome")
         else:
-            edit_template = the_jinja_env.get_template("edit.html")
+            edit_template = the_jinja_env.get_template("edit-drawing.html")
             self.response.write(edit_template.render({
                 "user_info":user
             }))
