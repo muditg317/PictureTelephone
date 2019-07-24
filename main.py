@@ -9,10 +9,18 @@ from handlers.HomePage import HomePage
 from handlers.WelcomePage import WelcomePage
 from handlers.EditDrawingPage import EditDrawingPage
 from handlers.TestPage import TestPage
+from handlers.DrawingsHandler import DrawingsHandler
+from seed_teleDrawing_db import seed_db
 
+
+class SeedDB(webapp2.RequestHandler):
+    def get(self):
+        seed_db()
+        self.redirect("/home")
 
 app = webapp2.WSGIApplication([
     ("/", BasePage),
+    ("/seed-db",SeedDB),
     ("/confirmation",ConfirmationPage),
     ("/create", CreatePage),
     ("/edit", EditPage),
@@ -20,4 +28,5 @@ app = webapp2.WSGIApplication([
     ("/welcome", WelcomePage),
     ('/edit-drawing', EditDrawingPage),
     ('/test', TestPage),
+    ("/drawings",DrawingsHandler),
 ], debug=True)
