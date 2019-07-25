@@ -18,19 +18,23 @@
       {% if threads|length != 0%}
         <div class='carousel'>
           <!-- Insert Carosuel Here -->
-          {% for thread in threads %}
-            thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
-            {% set edit_list = edits_by_thread[thread.key.id()|string] %}
-            {% set edit = edit_list[edit_list|length-1] %}
-              {% set kind = edit.addition.kind() %}
-                {{kind}}:
-                {% if kind=="Caption"%}
-                  {{edit.addition.get().content}}
-                {% else %}
-                  <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-                {% endif %}<br>
-            <br>
-          {% endfor %}
+          <figure>
+            {% for thread in threads %}
+              <div class="thread">
+                thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
+                {% set edit_list = edits_by_thread[thread.key.id()|string] %}
+                {% set edit = edit_list[edit_list|length-1] %}
+                  {% set kind = edit.addition.kind() %}
+                    {{kind}}:
+                    {% if kind=="Caption"%}
+                      <p class="caption">{{edit.addition.get().content}}</p>
+                    {% else %}
+                      <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+                    {% endif %}<br>
+                <br>
+              </div>
+            {% endfor %}
+          </figure>
         </div>
       {% else %}
         <h3>You've bailed on all the threads!</h3>
