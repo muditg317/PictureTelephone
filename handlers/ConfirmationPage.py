@@ -3,7 +3,6 @@ import jinja2
 import os
 from google.appengine.api import users,images
 from models import ThreadContent,Drawing,Caption,TeleUser,Thread,Edit
-
 from io import BytesIO
 from PIL import Image
 from StringIO import StringIO

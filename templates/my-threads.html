@@ -31,7 +31,7 @@
         {% endfor %}
       </div>
       <div class="user_threads">
-        <h2>Active Threads</h2>
+        <h2>Active Threads:</h2>
         {% for thread in user_threads %}
           <h3>thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a></h3>
           {% set edit_list = edits_by_thread[thread.key.id()|string] %}
