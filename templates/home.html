@@ -28,15 +28,9 @@
             {% for thread in threads %}
               <div class="thread">
                 thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
-                {% set edit_list = edits_by_thread[thread.key.id()|string] %}
-                {% set edit = edit_list[edit_list|length-1] %}
-                  {% set kind = edit.addition.kind() %}
-                    {% if kind=="Caption"%}
-                      <p class="caption">{{kind}}: {{edit.addition.get().content}}</p>
-                    {% else %}
-                      {{kind}}: <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-                    {% endif %}
-                <br>
+                {% set editList = edits_by_thread[thread.key.id()|string] %}
+                {% set edit_list = editList[editList|length-1:editList|length] %}
+                {% include "thread.html" %}
               </div>
             {% endfor %}
           </figure>
