@@ -1,0 +1,12 @@
+<div class="thread_display">
+  <h3>thread id: {{thread.thread_id}}</h3>
+  {% for edit in edit_list %}
+    {% set kind = edit.addition.kind() %}
+      {{kind}}:
+      {% if kind=="Caption"%}
+        {{edit.addition.get().content}}
+      {% else %}
+        <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+      {% endif %}<br>
+  {% endfor %}
+</div>

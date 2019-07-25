@@ -22,18 +22,20 @@ function drawLineTo(ctx,x,y,size) {
     // ctx.arc(x, y, size, 0, Math.PI*2, true);
     // ctx.closePath();
     // ctx.fill();
-
-    ctx.stroke()
+    ctx.beginPath();
     ctx.moveTo(prevX,prevY);
     ctx.lineTo(x,y);
-
+    ctx.stroke();
 
     prevX = x;
     prevY = y;
 }
 
 function clearCanvas(canvas,ctx) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // ctx.save();
+  // ctx.setTransform(1,0,0,1,0,0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // ctx.restore();
 }
 
 function sketchpad_mouseDown() {
