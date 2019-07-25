@@ -25,9 +25,12 @@ class ConfirmationNewThreadPage(webapp2.RequestHandler):
                 teleUser.put()
             thread_id = random.randint(1000000000,9999999999)
             thread = Thread(thread_id=thread_id)
-            drawing = self.request.get("drawing")
-            size = 600;
-            drawing = images.resize(drawing,size,size)
+            drawingDataUrl = self.request.get("drawing")
+            img_data = drawingDataUrl.split('data:image/png;base64,')[1]
+            img = Image.open(BytesIO(base64.b64decode(img_data)))
+            output = StringIO()
+            img.save(output, format=img.format)
+            drawing = output.getvalue()
             new_drawing = Drawing(content=drawing)
             content_key = new_drawing.put()
             thread.drawings.append(content_key)
