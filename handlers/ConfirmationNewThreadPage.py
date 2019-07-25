@@ -9,6 +9,11 @@ from PIL import Image
 from StringIO import StringIO
 import base64
 
+from io import BytesIO
+from PIL import Image
+from StringIO import StringIO
+import base64
+
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)+"/../templates/"),
     extensions=["jinja2.ext.autoescape"],

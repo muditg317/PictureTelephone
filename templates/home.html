@@ -25,12 +25,11 @@
                 {% set edit_list = edits_by_thread[thread.key.id()|string] %}
                 {% set edit = edit_list[edit_list|length-1] %}
                   {% set kind = edit.addition.kind() %}
-                    {{kind}}:
                     {% if kind=="Caption"%}
-                      <p class="caption">{{edit.addition.get().content}}</p>
+                      <p class="caption">{{kind}}: {{edit.addition.get().content}}</p>
                     {% else %}
-                      <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-                    {% endif %}<br>
+                      {{kind}}: <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+                    {% endif %}
                 <br>
               </div>
             {% endfor %}

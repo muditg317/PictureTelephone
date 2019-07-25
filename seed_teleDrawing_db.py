@@ -18,4 +18,4 @@ def seed_db():
     teleUsers = TeleUser.query().fetch()
     for teleUser in teleUsers:
         teleUser.bailedThreads = []
-    teleUser.put()
+        teleUser.put()

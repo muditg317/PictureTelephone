@@ -6,6 +6,8 @@ let imageData2;
 let drawingUrl;
 let storedDrawing;
 
+let thread_id;
+
 function drawDot(ctx,x,y,size) {
     r=0; g=0; b=0; a=255;
 
@@ -51,7 +53,8 @@ function getMousePos(e) {
   }
 }
 
-function init() {
+function init(threadId) {
+  thread_id = threadId;
   canvas = document.getElementById('canvas');
 
   if (canvas.getContext)
@@ -69,7 +72,7 @@ function saveImage() {
   // x = document.getElementById("drawing");
   // x.src = drawingUrl;
 
-  post('/confirmation-newthread', {"drawing": drawingUrl,"thread_id":1234567890,"request_type":"drawing"});
+  post('/confirmation-newthread', {"drawing": drawingUrl,"thread_id":thread_id,"request_type":"drawing"});
 }
 
 function post(path, params, method='post') {

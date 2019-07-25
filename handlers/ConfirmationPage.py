@@ -34,6 +34,7 @@ class ConfirmationPage(webapp2.RequestHandler):
                 thread = thread_entity_list[0]
             else:
                 thread = Thread(thread_id=thread_id)
+            print thread
             if edit_type=="caption":
                 caption = self.request.get("caption")
                 new_caption = Caption(content=caption)
@@ -57,6 +58,8 @@ class ConfirmationPage(webapp2.RequestHandler):
             edit_entity_list.sort(key=lambda x: x.addition.get().date,reverse=True)
             new_edit = Edit(user=teleUser.key,thread=thread_key,addition=content_key)
             new_edit.put()
+            for edit in edit_entity_list:
+                print edit.thread.id(),":",edit.thread.get().thread_id,":",edit.addition.kind()
             last_edit = edit_entity_list[0]
             confirmation_template = the_jinja_env.get_template("confirmation.html")
             self.response.write(confirmation_template.render({
