@@ -18,19 +18,15 @@
         <!-- Insert Carosuel Here -->
         {% for thread in threads %}
           thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
-          {% for edit in edits %}
-            {% if edit.thread == thread.key %}
-              <!-- edit:{{edit.key.id()}}<br> -->
-              {% set kind = edit.addition.kind() %}
+          {% set edit_list = edits_by_thread[thread.key.id()|string] %}
+          {% set edit = edit_list[edit_list|length-1] %}
+            {% set kind = edit.addition.kind() %}
               {{kind}}:
               {% if kind=="Caption"%}
                 {{edit.addition.get().content}}
               {% else %}
-                <!-- {{edit.addition}} -->
                 <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
               {% endif %}<br>
-            {% endif %}
-          {% endfor %}
           <br>
         {% endfor %}
       </div>

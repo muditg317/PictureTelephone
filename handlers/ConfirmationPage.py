@@ -46,9 +46,15 @@ class ConfirmationPage(webapp2.RequestHandler):
                 self.response.write("oof!")
                 return
             thread_key = thread.put()
+            edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
+            edit_entity_list.sort(key=lambda x: x.addition.get().date,reverse=True)
+            last_edit = edit_entity_list[0]
             new_edit = Edit(user=teleUser.key,thread=thread_key,addition=content_key)
             new_edit.put()
             confirmation_template = the_jinja_env.get_template("confirmation.html")
             self.response.write(confirmation_template.render({
-                "user_info":user
+                "user_info":user,
+                "thread":thread,
+                "last_edit":last_edit,
+                "new_edit":new_edit
             }))
