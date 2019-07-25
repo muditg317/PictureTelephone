@@ -1,7 +1,10 @@
 var canvas,ctx;
 var mouseX,mouseY,mouseDown=0;
-var fullQuality;
 var x;
+let imageData;
+let imageData2;
+let drawingUrl;
+let storedDrawing;
 
 function drawDot(ctx,x,y,size) {
     r=0; g=0; b=0; a=255;
@@ -62,16 +65,33 @@ function init() {
 }
 
 function saveImage() {
-  fullQuality = canvas.toDataURL('image/jpeg', 1.0);
-  console.log(fullQuality);
+  drawingUrl = canvas.toDataURL('image/png', 1.0);
+  // storedDrawing = localStorage.setItem("drawing-test", drawngUrl);
+  x = document.getElementById("drawing");
+  x.src = drawingUrl;
+
+  post('/confirmation', {"drawing": drawngUrl});
 }
 
-function changeImage(element){
-  // x = document.getElementById("drawing");
-  // x.setAttribute("src", fullQuality);
-  var x = document.getElementById("drawing");
-  var v = x.getAttribute("src");
-  if(v !== fullQuality)
-    v = fullQuality;
-  x.setAttribute("src", v);
+function post(path, params, method='post') {
+
+  // The rest of this code assumes you are not using a library.
+  // It can be made less wordy if you use one.
+  const form = document.createElement('form');
+  form.method = method;
+  form.action = path;
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const hiddenField = document.createElement('input');
+      hiddenField.type = 'hidden';
+      hiddenField.name = key;
+      hiddenField.value = params[key];
+
+      form.appendChild(hiddenField);
+    }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
 }

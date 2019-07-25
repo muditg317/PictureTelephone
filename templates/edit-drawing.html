@@ -13,12 +13,13 @@
     <div class="top-half" id='caption'>
       <!-- add the previous caption that the user is drawing here -->
     </div>
+    <img id='drawing' src="https://i.pinimg.com/originals/a4/3a/f3/a43af39f07c64134dd57e25b55d9a3d1.jpg">
     <div class='bottom-half' id="Canvas">
       <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
       <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
-      <p onClick='saveImage()'><a href='/test'>Submit!</a></p>
+      <button onClick='saveImage();'>Submit!</button>
     </div>
-    <script src='../static/scripts/edit.js'>
+    <script src='../static/scripts/edit-drawing.js'>
     </script>
 </body>
 </html>
