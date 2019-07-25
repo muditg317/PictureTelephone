@@ -41,11 +41,17 @@ class ConfirmationPage(webapp2.RequestHandler):
             if lastEdit.user == teleUser.key:
                 self.redirect("/edit?key="+str(thread.key.id()))
             if edit_type=="caption":
+                if lastEdit.key.kind() == "Caption":
+                    self.redirect("/home?request=failed")
+                    return
                 caption = self.request.get("caption")
                 new_caption = Caption(content=caption)
                 content_key = new_caption.put()
                 thread.captions.append(content_key)
             elif edit_type=="drawing":
+                if lastEdit.key.kind() == "Caption":
+                    self.redirect("/home?request=failed")
+                    return
                 drawingDataUrl = self.request.get("drawing")
                 img_data = drawingDataUrl.split('data:image/png;base64,')[1]
                 img = Image.open(BytesIO(base64.b64decode(img_data)))

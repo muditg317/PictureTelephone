@@ -19,33 +19,17 @@
       <div class='bailed_threads'>
         <h2>Bailed threads:</h2>
         {% for thread in bailed_threads %}
-          <h3>thread id: {{thread.thread_id}}</h3>
-          {% for edit in edits_by_thread[thread.key.id()|string] %}
-            {% set kind = edit.addition.kind() %}
-              {{kind}}:
-              {% if kind=="Caption"%}
-                {{edit.addition.get().content}}
-              {% else %}
-                <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-              {% endif %}<br>
-          {% endfor %}
+          {% set edit_list = edits_by_thread[thread.key.id()|string] %}
+          {% include "thread.html" %}
         {% endfor %}
       </div>
       <div class="user_threads">
         <h2>Active Threads:</h2>
         {% for thread in user_threads %}
-          <h3>thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a></h3>
-          {% set edit_list = edits_by_thread[thread.key.id()|string] %}
-          {% set edit = edit_list[edit_list|length-1] %}
-            {% set kind = edit.addition.kind() %}
-              {{kind}}:
-              {% if kind=="Caption"%}
-                {{edit.addition.get().content}}
-              {% else %}
-                <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-              {% endif %}<br>
+          {% set editList = edits_by_thread[thread.key.id()|string] %}
+          {% set edit_list = editList[editList|length-1:editList|length] %}
+          {% include "thread.html" %}
           <a href="/bail?key={{thread.key.id()}}">bail out!</a>
-          <br>
         {% endfor %}
       </div>
     </div>

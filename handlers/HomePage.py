@@ -11,6 +11,7 @@ the_jinja_env = jinja2.Environment(
 
 class HomePage(webapp2.RequestHandler):
     def get(self):
+        request = self.request.get("request")
         user = users.get_current_user()
         if not user:
             self.redirect("/welcome")
@@ -52,6 +53,7 @@ class HomePage(webapp2.RequestHandler):
             # # caption_entity_list.sort(key=lambda x: x.date)
             home_template = the_jinja_env.get_template("home.html")
             self.response.write(home_template.render({
+                "request":request,
                 "user_info":teleUser,
                 "logout_url":users.create_logout_url("/welcome"),
                 "threads":user_open_threads,

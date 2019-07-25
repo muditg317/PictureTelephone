@@ -26,7 +26,7 @@ class TeleUser(ndb.Model):
     @staticmethod
     def fromGSI(user):
         email = user.nickname()
-        username = email[:email.index("@")]
+        username = email#[:email.index("@")]
         teleUser = TeleUser(username=username,id=user.user_id())
         return teleUser
 
