@@ -17,8 +17,10 @@ class HomePage(webapp2.RequestHandler):
         else:
             teleUser = TeleUser.get_by_id(user.user_id())
             if not teleUser:
+                print "no teleUser"
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
+                print teleUser
             thread_entity_list = Thread.query().fetch()
             user_open_threads = []
             for thread in thread_entity_list:
@@ -30,8 +32,9 @@ class HomePage(webapp2.RequestHandler):
                 thread_key = thread.key
                 edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
                 if edit_entity_list:
-                    # print edit_entity_list
                     edit_entity_list.sort(key=lambda x: x.addition.get().date)
+                    for edit in edit_entity_list:
+                        print edit.thread.id(),":",edit.thread.get().thread_id,":",edit.addition.kind()
                 edits_by_thread[str(thread_key.id())]=edit_entity_list
             # for thread_id in edits_by_thread:
             #     print thread_id,":"

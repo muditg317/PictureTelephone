@@ -5,6 +5,11 @@ import random
 from google.appengine.api import users,images
 from models import ThreadContent,Drawing,Caption,TeleUser,Thread,Edit
 
+from io import BytesIO
+from PIL import Image
+from StringIO import StringIO
+import base64
+
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)+"/../templates/"),
     extensions=["jinja2.ext.autoescape"],
