@@ -35,6 +35,11 @@ class ConfirmationPage(webapp2.RequestHandler):
             else:
                 thread = Thread(thread_id=thread_id)
             print thread
+            edit_entity_list = Edit.query().filter(Edit.thread==thread.key).fetch()
+            edit_entity_list.sort(key=lambda x: x.addition.get().date,reverse=True)
+            lastEdit = edit_entity_list[0]
+            if lastEdit.user == teleUser.key:
+                self.redirect("/edit?key="+str(thread.key.id()))
             if edit_type=="caption":
                 caption = self.request.get("caption")
                 new_caption = Caption(content=caption)
