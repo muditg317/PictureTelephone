@@ -19,16 +19,34 @@ class HomePage(webapp2.RequestHandler):
             if not teleUser:
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
-            home_template = the_jinja_env.get_template("home.html")
             thread_entity_list = Thread.query().fetch()
-            edit_entity_list = Edit.query().fetch()
-            drawing_entity_list = Drawing.query().fetch()
-            caption_entity_list = Caption.query().fetch()
+            user_open_threads = []
+            for thread in thread_entity_list:
+                if thread.key not in teleUser.bailedThreads:
+                    user_open_threads.append(thread)
+            # print user_open_threads
+            edits_by_thread = {}
+            for thread in user_open_threads:
+                thread_key = thread.key
+                edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
+                if edit_entity_list:
+                    # print edit_entity_list
+                    edit_entity_list.sort(key=lambda x: x.addition.get().date)
+                edits_by_thread[str(thread_key.id())]=edit_entity_list
+            # for thread_id in edits_by_thread:
+            #     print thread_id,":"
+            #     for edit in edits_by_thread[thread_id]:
+            #         print edit
+            # drawing_entity_list = Drawing.query().order(Drawing.date).fetch()
+            # # drawing_entity_list.sort(key=lambda x: x.date)
+            # caption_entity_list = Caption.query().order(Caption.date).fetch()
+            # # caption_entity_list.sort(key=lambda x: x.date)
+            home_template = the_jinja_env.get_template("home.html")
             self.response.write(home_template.render({
                 "user_info":teleUser,
                 "logout_url":users.create_logout_url("/welcome"),
-                "threads":thread_entity_list,
-                "edits":edit_entity_list,
-                "drawings":drawing_entity_list,
-                "captions":caption_entity_list
+                "threads":user_open_threads,
+                "edits_by_thread":edits_by_thread,
+                # "drawings":drawing_entity_list,
+                # "captions":caption_entity_list
             }))

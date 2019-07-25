@@ -7,35 +7,40 @@
   <body>
     <div class="nav_bar">
       <!--insert teledrawing icon-->
-      <a href="/">Home</a> <!--tab 1-->
-      <a href="/">[placeholder]</a><!--tab 2-->
+      <a href="/home">Home</a> <!--tab 1-->
+      <a href="/my-threads">My Threads</a><!--tab 2-->
+      <a href="{{logout_url}}">log out</a>
     </div>
     <div class='title_block'>
       <h1>{{user_info.username}}: CHOOSE A THREAD</h1>
     </div>
     <div class="main_body">
-      <div class='carousel'>
-        <!-- Insert Carosuel Here -->
-        {% for thread in threads %}
-          thread id: {{thread.thread_id}}<br>
-          {% for edit in edits %}
-            {% if edit.thread == thread.key %}
-              <!-- edit:{{edit.key.id()}}<br> -->
-              {% set kind = edit.addition.kind() %}
-              {{kind}}:
-              {% if kind=="Caption"%}
-                {{edit.addition.get().content}}
-              {% else %}
-                <!-- {{edit.addition}} -->
-                <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-              {% endif %}<br>
-            {% endif %}
-          {% endfor %}
-          <br>
-        {% endfor %}
-      </div>
+      {% if threads|length != 0%}
+        <div class='carousel'>
+          <!-- Insert Carosuel Here -->
+          <figure>
+            {% for thread in threads %}
+              <div class="thread">
+                thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
+                {% set edit_list = edits_by_thread[thread.key.id()|string] %}
+                {% set edit = edit_list[edit_list|length-1] %}
+                  {% set kind = edit.addition.kind() %}
+                    {{kind}}:
+                    {% if kind=="Caption"%}
+                      <p class="caption">{{edit.addition.get().content}}</p>
+                    {% else %}
+                      <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+                    {% endif %}<br>
+                <br>
+              </div>
+            {% endfor %}
+          </figure>
+        </div>
+      {% else %}
+        <h3>You've bailed on all the threads!</h3>
+        <p>Check out the <a href="/my-threads">My Threads</a> tab!</p>
+      {% endif %}
     </div>
-    <a href="{{logout_url}}">log out</a>
-    <a href="/edit">edit</a>
+    <a href="/create">create a new thread!</a>
   </body>
 </html>

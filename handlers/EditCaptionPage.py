@@ -10,29 +10,21 @@ the_jinja_env = jinja2.Environment(
     extensions=["jinja2.ext.autoescape"],
     autoescape=True)
 
-class EditPage(webapp2.RequestHandler):
+class EditCaptionPage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if not user:
             self.redirect("/welcome")
         else:
-            teleUser = TeleUser.get_by_id(user.user_id())
-            if not teleUser:
-                teleUser = TeleUser.fromGSI(user=user)
-                teleUser.put()
             thread_key = ndb.Key(Thread,int(self.request.get("key")))
-            if(thread_key in teleUser.bailedThreads):
-                self.redirect("/my-threads")
-                return
             thread = thread_key.get()
             edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
             edit_entity_list.sort(key=lambda x: x.addition.get().date,reverse=True)
-            lastEditType = edit_entity_list[0].addition.kind()
-            if(lastEditType=="Drawing"):
-                self.redirect("/edit-caption?key=%s"%thread_key.id())
-            else:
-                self.redirect("/edit-drawing?key=%s"%thread_key.id())
-            edit_template = the_jinja_env.get_template("edit.html")
+            lastEdit = edit_entity_list[0]
+            last_drawing = lastEdit.addition.get()
+            edit_template = the_jinja_env.get_template("edit-caption.html")
             self.response.write(edit_template.render({
-                "user_info":user
+                "user_info":user,
+                "thread":thread,
+                "drawing":last_drawing
             }))

@@ -11,6 +11,26 @@
     <title></title>
   </head>
   <body>
-    <a href="/home">home</a>
+    <div class="previous_edit">
+      Thread state:<br>
+      {% set kind = last_edit.addition.kind() %}
+        {{kind}}:
+        {% if kind=="Caption"%}
+          {{last_edit.addition.get().content}}
+        {% else %}
+          <img src="drawings?key={{last_edit.addition.id()}}" alt="{{last_edit.addition.id()}}">
+        {% endif %}<br>
+    </div>
+    <div class="new_edit">
+      Your addition:<br>
+      {% set kind = new_edit.addition.kind() %}
+        {{kind}}:
+        {% if kind=="Caption"%}
+          {{new_edit.addition.get().content}}
+        {% else %}
+          <img src="drawings?key={{new_edit.addition.id()}}" alt="{{new_edit.addition.id()}}">
+        {% endif %}<br>
+    </div>
+    <button type="button" name="goHome" onclick="window.location.href='/home'">Submit!</button>
   </body>
 </html>

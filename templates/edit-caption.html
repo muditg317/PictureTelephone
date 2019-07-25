@@ -3,3 +3,17 @@
 <!--previous image -->
 <!--form object that lets the user input a caption-->
 <!-- submit button -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <img src="drawings?key={{drawing.key.id()}}">
+    <form action="/confirmation?thread_id={{thread.thread_id}}&request_type=caption" method="post">
+      <input type="text" name="caption" value="">
+      <input type="submit" name="" value="submit">
+    </form>
+  </body>
+</html>

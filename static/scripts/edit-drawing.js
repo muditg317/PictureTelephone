@@ -66,11 +66,10 @@ function init() {
 
 function saveImage() {
   drawingUrl = canvas.toDataURL('image/png', 1.0);
-  // storedDrawing = localStorage.setItem("drawing-test", drawngUrl);
   x = document.getElementById("drawing");
   x.src = drawingUrl;
 
-  post('/confirmation', {"drawing": drawngUrl});
+  post('/confirmation', {"drawing": drawingUrl,"thread_id":1234567890,"request_type":"drawing"});
 }
 
 function post(path, params, method='post') {

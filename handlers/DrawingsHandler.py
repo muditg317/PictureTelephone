@@ -13,7 +13,6 @@ the_jinja_env = jinja2.Environment(
 class DrawingsHandler(webapp2.RequestHandler):
     def get(self):
         drawing_key = ndb.Key(Drawing,int(self.request.get("key")))
-        # drawing = Drawing.query().filter(Drawing.key.id()==drawing_key).fetch()
         drawing = drawing_key.get()
         if drawing:
            self.response.headers['Content-Type'] = "image/png"

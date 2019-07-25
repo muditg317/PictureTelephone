@@ -10,7 +10,7 @@ the_jinja_env = jinja2.Environment(
     extensions=["jinja2.ext.autoescape"],
     autoescape=True)
 
-class EditPage(webapp2.RequestHandler):
+class BailPage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if not user:
@@ -21,18 +21,15 @@ class EditPage(webapp2.RequestHandler):
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
             thread_key = ndb.Key(Thread,int(self.request.get("key")))
-            if(thread_key in teleUser.bailedThreads):
-                self.redirect("/my-threads")
-                return
             thread = thread_key.get()
+            teleUser.bailedThreads.append(thread_key)
+            teleUser.put()
             edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
-            edit_entity_list.sort(key=lambda x: x.addition.get().date,reverse=True)
-            lastEditType = edit_entity_list[0].addition.kind()
-            if(lastEditType=="Drawing"):
-                self.redirect("/edit-caption?key=%s"%thread_key.id())
-            else:
-                self.redirect("/edit-drawing?key=%s"%thread_key.id())
-            edit_template = the_jinja_env.get_template("edit.html")
-            self.response.write(edit_template.render({
-                "user_info":user
+            edit_entity_list.sort(key=lambda x: x.addition.get().date)
+            bail_template = the_jinja_env.get_template("bail.html")
+            self.response.write(bail_template.render({
+                "user_info":teleUser,
+                "logout_url":users.create_logout_url("/welcome"),
+                "thread":thread,
+                "edits":edit_entity_list,
             }))
