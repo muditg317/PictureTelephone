@@ -8,15 +8,28 @@ let storedDrawing;
 
 let thread_id;
 
-function drawDot(ctx,x,y,size) {
+let prevX;
+let prevY;
+
+
+function drawLineTo(ctx,x,y,size) {
     r=0; g=0; b=0; a=255;
 
     ctx.fillStyle = "rgba("+r+","+g+","+b+","+(a/255)+")";
+    ctx.lineWidth = size*2;
 
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI*2, true);
-    ctx.closePath();
-    ctx.fill();
+    // ctx.beginPath();
+    // ctx.arc(x, y, size, 0, Math.PI*2, true);
+    // ctx.closePath();
+    // ctx.fill();
+
+    ctx.stroke()
+    ctx.moveTo(prevX,prevY);
+    ctx.lineTo(x,y);
+
+
+    prevX = x;
+    prevY = y;
 }
 
 function clearCanvas(canvas,ctx) {
@@ -25,7 +38,9 @@ function clearCanvas(canvas,ctx) {
 
 function sketchpad_mouseDown() {
     mouseDown=1;
-    drawDot(ctx,mouseX,mouseY,2);
+    prevX = mouseX;
+    prevY = mouseY;
+    drawLineTo(ctx,mouseX,mouseY,2);
 }
 
 function sketchpad_mouseUp() {
@@ -35,7 +50,7 @@ function sketchpad_mouseUp() {
 function sketchpad_mouseMove(e) {
   getMousePos(e);
   if (mouseDown==1) {
-    drawDot(ctx,mouseX,mouseY,2);
+    drawLineTo(ctx,mouseX,mouseY,2);
   }
 }
 
