@@ -6,19 +6,15 @@
   </head>
   <body>
     <div class="mainBody">
-      <form action="/confirmation"
-              enctype="multipart/form-data"
-              method="post">
-          <select name="request_type">
-            <option value="drawing">drawing</option>
-            <option value="caption">caption</option>
-          </select>
-          <input type="number" name="thread_id" value="">
-          <textarea name="caption" rows="3" cols="60"></textarea>
-          <input type="file" name="drawing"/>
-          <input type="submit" value="submit">
-      </form>
-      <hr>
+      <h1>You just edited this thread!</h1>
+      <h4>Thread: {{thread_id}}</h4>
+      {% set kind = edit.addition.kind() %}
+        {% if kind=="Caption"%}
+          <p class="caption">{{kind}}: {{edit.addition.get().content}}</p>
+        {% else %}
+          {{kind}}: <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+        {% endif %}<br>
+      <a href="/bail?key={{thread.key.id()}}">Bail out!</a>
     </div>
   </body>
 </html>

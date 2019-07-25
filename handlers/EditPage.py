@@ -27,12 +27,16 @@ class EditPage(webapp2.RequestHandler):
             thread = thread_key.get()
             edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
             edit_entity_list.sort(key=lambda x: x.addition.get().date,reverse=True)
-            lastEditType = edit_entity_list[0].addition.kind()
-            if(lastEditType=="Drawing"):
-                self.redirect("/edit-caption?key=%s"%thread_key.id())
+            lastEdit = edit_entity_list[0]
+            if lastEdit.user != teleUser.key:
+                if(lastEdit.addition.kind()=="Drawing"):
+                    self.redirect("/edit-caption?key=%s"%thread_key.id())
+                else:
+                    self.redirect("/edit-drawing?key=%s"%thread_key.id())
             else:
-                self.redirect("/edit-drawing?key=%s"%thread_key.id())
-            edit_template = the_jinja_env.get_template("edit.html")
-            self.response.write(edit_template.render({
-                "user_info":user
-            }))
+                edit_template = the_jinja_env.get_template("edit.html")
+                self.response.write(edit_template.render({
+                    "user_info":user,
+                    "thread":thread,
+                    "edit":lastEdit
+                }))
