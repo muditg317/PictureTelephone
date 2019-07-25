@@ -14,10 +14,14 @@ class Thread(ndb.Model):
     drawings = ndb.KeyProperty(Drawing,repeated=True)
     captions = ndb.KeyProperty(Caption,repeated=True)
 
+class BailOut(ndb.Model):
+    thread = ndb.KeyProperty(Thread,required=True)
+    last_edit = ndb.KeyProperty(required=True)
+
 class TeleUser(ndb.Model):
     username = ndb.StringProperty(required=True)
     # email = ndb.StringProperty(required=True)
-    bailedThreads = ndb.KeyProperty(Thread,repeated=True)
+    bailOuts = ndb.KeyProperty(BailOut,repeated=True)
 
     @staticmethod
     def fromGSI(user):

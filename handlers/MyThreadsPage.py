@@ -20,19 +20,29 @@ class MyThreadsPage(webapp2.RequestHandler):
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
             thread_entity_list = Thread.query().fetch()
-            edits_by_thread = {}
-            user_threads = []
+            user_bailOuts = [bailOut_key.get() for bailOut_key in teleUser.bailOuts]
             bailed_threads = []
+            user_threads = []
+            edits_by_thread = {}
             for thread in thread_entity_list:
                 thread_key = thread.key
                 edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
                 if edit_entity_list:
                     edit_entity_list.sort(key=lambda x: x.addition.get().date)
-                    edits_by_thread[str(thread_key.id())]=edit_entity_list
-                    if thread_key in teleUser.bailedThreads:
-                        bailed_threads.append(thread)
-                    else:
+                    bailed = False
+                    for bailOut in user_bailOuts:
+                        if thread_key == bailOut.thread:
+                            bailed = True
+                            bailed_threads.append(thread)
+                            last_edit_before_bail = bailOut.last_edit.get()
+                            for i in range(len(edit_entity_list)):
+                                if edit_entity_list[i] == last_edit_before_bail:
+                                    edit_entity_list = edit_entity_list[0:i+1]
+                                    break
+                            break
+                    if not bailed:
                         user_threads.append(thread)
+                    edits_by_thread[str(thread_key.id())]=edit_entity_list
             # user_threads.sort(key=lambda x: x.key in teleUser.bailedThreads,reverse=True)
             my_threads_template = the_jinja_env.get_template("my-threads.html")
             self.response.write(my_threads_template.render({
