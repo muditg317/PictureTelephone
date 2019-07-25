@@ -25,7 +25,7 @@ class MyThreadsPage(webapp2.RequestHandler):
             bailed_threads = []
             for thread in thread_entity_list:
                 thread_key = thread.key
-                edit_entity_list = Edit.query().filter(Edit.thread==thread_key).filter(Edit.user==teleUser.key).fetch()
+                edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
                 if edit_entity_list:
                     edit_entity_list.sort(key=lambda x: x.addition.get().date)
                     edits_by_thread[str(thread_key.id())]=edit_entity_list

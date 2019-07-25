@@ -1,0 +1,23 @@
+.topHalf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #8DAD53;
+}
+
+#welcome, #td {
+  font-size: 180px;
+  color: white;
+}
+
+#to {
+  font-size: 90px;
+  color: white;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 60px;
+}

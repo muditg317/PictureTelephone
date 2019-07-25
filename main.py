@@ -14,6 +14,7 @@ from handlers.EditDrawingPage import EditDrawingPage
 from handlers.EditCaptionPage import EditCaptionPage
 from handlers.DrawingsHandler import DrawingsHandler
 from seed_teleDrawing_db import seed_db
+from handlers.RulesPage import RulesPage
 
 
 class SeedDB(webapp2.RequestHandler):
@@ -35,4 +36,5 @@ app = webapp2.WSGIApplication([
     ('/edit-drawing', EditDrawingPage),
     ('/edit-caption', EditCaptionPage),
     ("/drawings",DrawingsHandler),
+    ("/rules",RulesPage),
 ], debug=True)
