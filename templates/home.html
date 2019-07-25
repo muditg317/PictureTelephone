@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>[Insert Name Here]</title>
+    <title>TeleDrawings</title>
   </head>
   <body>
     <div class="nav_bar">
@@ -12,7 +12,7 @@
       <a href="{{logout_url}}">log out</a>
     </div>
     <div class='title_block'>
-      <h1>{{user_info.username}}: CHOOSE A THREAD</h1>
+      <h1>Hi, {{user_info.username}}! Choose a Thread</h1>
     </div>
     <div class="main_body">
       {% if threads|length != 0%}
@@ -37,10 +37,10 @@
           </figure>
         </div>
       {% else %}
-        <h3>You've bailed on all the threads!</h3>
+        <h3>Uh oh! You've bailed on all the threads!</h3>
         <p>Check out the <a href="/my-threads">My Threads</a> tab!</p>
       {% endif %}
     </div>
-    <a href="/create">create a new thread!</a>
+    <a href="/create">Create a new Thread!</a>
   </body>
 </html>
