@@ -22,9 +22,15 @@ class HomePage(webapp2.RequestHandler):
                 teleUser.put()
                 print teleUser
             thread_entity_list = Thread.query().fetch()
+            user_bailOuts = [bailOut_key.get() for bailOut_key in teleUser.bailOuts]
             user_open_threads = []
             for thread in thread_entity_list:
-                if thread.key not in teleUser.bailedThreads:
+                bailed = False
+                for bailOut in user_bailOuts:
+                    if thread.key == bailOut.thread:
+                        bailed = True
+                        break
+                if not bailed:
                     user_open_threads.append(thread)
             # print user_open_threads
             edits_by_thread = {}

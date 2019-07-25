@@ -3,7 +3,7 @@ import jinja2
 import os
 from google.appengine.ext import ndb
 from google.appengine.api import users,images
-from models import ThreadContent,Drawing,Caption,TeleUser,Thread,Edit
+from models import *
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)+"/../templates/"),
@@ -22,10 +22,11 @@ class BailPage(webapp2.RequestHandler):
                 teleUser.put()
             thread_key = ndb.Key(Thread,int(self.request.get("key")))
             thread = thread_key.get()
-            teleUser.bailedThreads.append(thread_key)
-            teleUser.put()
             edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
             edit_entity_list.sort(key=lambda x: x.addition.get().date)
+            new_bailOut = BailOut(thread=thread_key,last_edit=edit_entity_list[-1].key)
+            teleUser.bailOuts.append(new_bailOut.put())
+            teleUser.put()
             bail_template = the_jinja_env.get_template("bail.html")
             self.response.write(bail_template.render({
                 "user_info":teleUser,

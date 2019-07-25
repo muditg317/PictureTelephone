@@ -21,7 +21,13 @@ class EditPage(webapp2.RequestHandler):
                 teleUser = TeleUser.fromGSI(user=user)
                 teleUser.put()
             thread_key = ndb.Key(Thread,int(self.request.get("key")))
-            if(thread_key in teleUser.bailedThreads):
+            user_bailOuts = [bailOut_key.get() for bailOut_key in teleUser.bailOuts]
+            bailed = False
+            for bailOut in user_bailOuts:
+                if thread_key == bailOut.thread:
+                    bailed = True
+                    break
+            if bailed:
                 self.redirect("/my-threads")
                 return
             thread = thread_key.get()
