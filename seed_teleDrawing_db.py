@@ -15,3 +15,7 @@ def seed_db():
         thread.captions=[]
         thread.drawings=[thread.drawings[0]]
         thread.put()
+    teleUsers = TeleUser.query().fetch()
+    for teleUser in teleUsers:
+        teleUser.bailedThreads = []
+    teleUser.put()

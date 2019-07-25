@@ -66,8 +66,8 @@ function init() {
 
 function saveImage() {
   drawingUrl = canvas.toDataURL('image/png', 1.0);
-  x = document.getElementById("drawing");
-  x.src = drawingUrl;
+  // x = document.getElementById("drawing");
+  // x.src = drawingUrl;
 
   post('/confirmation', {"drawing": drawingUrl,"thread_id":1234567890,"request_type":"drawing"});
 }
