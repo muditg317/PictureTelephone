@@ -16,9 +16,11 @@
   {% set edit = last_edit %}
   {% include "editDisplay.html" %}
   <div class='bottom-half' id="Canvas">
-    <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
     <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
-    <button onClick='saveImage({{thread.thread_id}});'>Submit!</button>
+    <div class="create_buttons">
+      <button id="clearCanvas" onclick="clearCanvas(canvas,ctx);">Clear</button>
+      <button id="saveCanvas" onClick='saveImage();'>Submit!</button>
+    </div>
   </div>
 {% endblock %}
 

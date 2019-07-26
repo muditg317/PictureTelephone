@@ -21,6 +21,9 @@
           {% for thread in bailed_threads %}
             {% set edit_list = edits_by_thread[thread.key.id()|string] %}
             {% include "threadDisplay.html" %}
+            <div class="vert_divider" style="min-width: 20px;">
+
+            </div>
           {% endfor %}
         </div>
       </div>
@@ -36,6 +39,9 @@
           {% set editList = edits_by_thread[thread.key.id()|string] %}
           {% set edit_list = editList[editList|length-1:editList|length] %}
           {% include "threadDisplay.html" %}
+          <div class="vert_divider" style="min-width: 20px;">
+
+          </div>
         {% endfor %}
       </div>
     </div>

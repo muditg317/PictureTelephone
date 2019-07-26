@@ -1,6 +1,6 @@
 .thread_list {
   height: 790px;
-  width: 600px;
+  min-width: 700px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -14,7 +14,7 @@
 }
 
 .thread_display {
-  min-width: 600px;
+  min-width: 630px;
   box-sizing: border-box;
   border-color: black;
   border-width: thick;
@@ -27,7 +27,7 @@
   width: 700px;
   height: min-content;
   border-style: solid;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 
 .thread_display > header {
