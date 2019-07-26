@@ -1,0 +1,28 @@
+#title {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+#secondTitle {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+#list {
+  font-size: 29px;
+  margin-top: 0px;
+}
+
+.title_block{
+  height: 100px;
+}
+
+#paragraph {
+  font-size: 27px;
+  margin-top: 0px;
+}
+
+#intro {
+  font-size: 29px;
+  margin-top: 0px;
+}
