@@ -18,12 +18,12 @@
       <!-- Insert Carosuel Here -->
       <figure>
         {% for thread in threads %}
-          <div class="thread">
-            thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
-            {% set editList = edits_by_thread[thread.key.id()|string] %}
-            {% set edit_list = editList[editList|length-1:editList|length] %}
-            {% include "threadDisplay.html" %}
-          </div>
+          {% set onclick_used = True %}
+          {% set onclick_link = "/edit?key="+thread.key.id()|string %}
+          {% set canBail = True %}
+          {% set editList = edits_by_thread[thread.key.id()|string] %}
+          {% set edit_list = editList[editList|length-1:editList|length] %}
+          {% include "threadDisplay.html" %}
         {% endfor %}
       </figure>
     </div>

@@ -17,5 +17,6 @@ class RulesPage(webapp2.RequestHandler):
         else:
             create_template = the_jinja_env.get_template("rules.html")
             self.response.write(create_template.render({
-                "user_info":user
+                "user_info":user,
+                "logout_url":users.create_logout_url("/welcome"),
             }))
