@@ -8,8 +8,8 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 10px;
-  border-style: solid;
   width: 700px;
+  border-style: solid;
 }
 
 .thread_display > header {
