@@ -11,8 +11,16 @@
       <div class="message" id="to">to</div>
       <div class="message" id="td">TeleDrawings</div> <!--Replace with logo name time permitting-->
     </div>
-    <div class='options'>
-      <button id="signin_button"><a href="{{login_url}}">Sign in</a></button>
+    <div id='bottomHalf'>
+      <div class='options'>
+        <button id="signin_button"><a href="{{login_url}}">Sign in</a></button>
+      </div>
+      <img id='paper' src="../static/images/paperLines.png" width='1680px'alt="Planets" usemap="#planetmap">
+      <map name="planetmap">
+        <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+        <area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
+        <area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
+      </map>
     </div>
   </body>
 </html>
