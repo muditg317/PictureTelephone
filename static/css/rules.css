@@ -26,3 +26,7 @@
   font-size: 29px;
   margin-top: 0px;
 }
+
+#mainBodyBkgdImg{
+  background-size: contain;
+}
