@@ -44,5 +44,7 @@ class EditPage(webapp2.RequestHandler):
                 self.response.write(edit_template.render({
                     "user_info":user,
                     "thread":thread,
-                    "edit":lastEdit
+                    "edit":lastEdit,
+                    "logout_url":users.create_logout_url("/welcome"),
+
                 }))
