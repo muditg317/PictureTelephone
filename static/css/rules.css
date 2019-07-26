@@ -28,5 +28,5 @@
 }
 
 #mainBodyBkgdImg{
-  background-size: contain;
+  width: inherit;
 }

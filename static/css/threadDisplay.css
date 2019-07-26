@@ -1,5 +1,6 @@
 .thread_list {
   height: 790px;
+  width: 600px;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
