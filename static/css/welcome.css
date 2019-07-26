@@ -1,8 +1,8 @@
 body {
-  /* background-image: url(../images/paperLines.png);
+  background-image: url(../images/paperLines.png);
   background-repeat: repeat-y;
-  background-size: contain; */
-  height: 1100px;
+  background-size: cover;
+  /* height: 900px; */
 }
 
 .topHalf {
@@ -11,12 +11,23 @@ body {
   align-items: center;
   background-color: #8DAD53;
   margin: -10px;
+  /*
+  height: 50%;
+  width: 100%; */
+  background-size: cover;
 }
 
-#welcome, #td {
+#welcome {
   font-size: 140px;
   color: white;
   text-shadow: 3px 3px rgba(0, 0, 0, 0.6);
+}
+
+#td {
+  font-size: 140px;
+  color: white;
+  text-shadow: 3px 3px rgba(0, 0, 0, 0.6);
+  padding-bottom: 20px;
 }
 
 #to {
@@ -29,18 +40,30 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0px;
-  margin-right: -20px;
-  background-color: lightblue;
+  /* margin-top: 0px; */
+  margin-right: -10px;
+  margin-left: -10px;
+  background-color: #8DAD53;
+  padding-top: 0px;
+  /* width: 100%; */
+  font-size: 60px;
+  border-top-style: solid;
+  border-color: rgb(38, 38, 38);
 }
 
-#signin_button {
+/* a {
     font-size: 60px;
     background:transparent;
     border: none;
+    margin-left: -10px;
+    color: white;
+} */
+
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
 }
 
-#bottomHalf {
-  margin-left: -10px;
-  padding-top: 0px;
+a:hover {
+  color: #f4f6f6;
 }
