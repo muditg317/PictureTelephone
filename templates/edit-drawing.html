@@ -19,7 +19,7 @@
     <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
     <div class="create_buttons">
       <button id="clearCanvas" onclick="clearCanvas(canvas,ctx);">Clear</button>
-      <button id="saveCanvas" onClick='saveImage();'>Submit!</button>
+      <button id="saveCanvas" onClick='saveImage({{thread.thread_id}});'>Submit!</button>
     </div>
   </div>
 {% endblock %}
