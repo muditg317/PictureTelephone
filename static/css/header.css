@@ -58,3 +58,7 @@ header {
   position: absolute;
   right: 0;
 }
+
+#mainBodyBkgdImg{
+  width: inherit;
+}

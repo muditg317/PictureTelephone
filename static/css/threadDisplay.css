@@ -128,3 +128,7 @@
   margin-bottom: 0;
   border-top-style: none;
 }
+
+#mainBodyBkgdImg{
+  width: inherit;
+}
