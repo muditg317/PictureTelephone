@@ -4,11 +4,12 @@
     <div class="length_bailOut">
       <p class="length" >Length: {{thread.drawings|length + thread.captions|length}}</p>
       {% if canBail %}
-        <button type="button" id="bail_out" onclick="window.location.href='/bail?key={{thread.key.id()}}'">Bail out!</button>
+        <button type="button" id="bail_out" onclick="event.stopPropagation(); window.location.href='/bail?key={{thread.key.id()}}';">Bail out!</button>
       {% endif %}
     </div>
   </header>
   {% for edit in edit_list %}
     {% include "editDisplay.html" %}
+    <div class="divider"></div>
   {% endfor %}
-</div><br><br>
+</div><br>
