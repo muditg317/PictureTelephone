@@ -13,9 +13,10 @@
 {% block background_imgURL %}{% endblock %}
 
 {% block pageContent %}
-  <h4>Thread: {{thread_id}}</h4>
-  {% include "editDisplay.html" %}
-  <a href="/bail?key={{thread.key.id()}}">Bail out!</a>
+  {% set canBail = True %}
+  {% set edit_list = [edit] %}
+  {% include "threadDisplay.html" %}
+  <!-- <a href="/bail?key={{thread.key.id()}}">Bail out!</a> -->
 {% endblock %}
 
 {% block scripts %}

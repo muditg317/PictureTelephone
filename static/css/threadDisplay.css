@@ -12,9 +12,63 @@
 }
 
 .thread_display {
-  background-color: blue;
+  border-style: solid;
 }
 
-.edit_display {
-  background-color: lightblue;
+.thread_display > header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.thread_display > header > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.length_bailOut {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.length_bailOut > * {
+  padding: 0px 10px;
+}
+
+.thread_display > * {
+  width: 100%;
+}
+
+.thread_display:hover {
+  box-shadow: 5px 5px rgba(0,0,0,0.5);
+}
+
+#thread_label {
+  align-self: flex-end;
+}
+
+#bail_out {
+  height: 30px;
+  padding: 0px 10px;
+  color: black;
+  font-family: roboto;
+  /* font-weight: bold; */
+  font-size: 16px;
+  background-color: rgba(255,255,255,0);
+  border-radius: 15px;
+  border-color: black;
+  border-width: 1px;
+}
+
+
+#bail_out:hover {
+  background-color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.5);
+}
+
+
+.edit_display:hover {
+  background-color: rgba(0,0,0,0.03);
 }
