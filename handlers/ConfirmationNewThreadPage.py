@@ -40,11 +40,24 @@ class ConfirmationNewThreadPage(webapp2.RequestHandler):
             img.save(output, format=img.format)
             drawing = output.getvalue()
             new_drawing = Drawing(content=drawing)
-            content_key = new_drawing.put()
-            thread.drawings.append(content_key)
-            thread_key = thread.put()
-            new_edit = Edit(user=teleUser.key,thread=thread_key,addition=content_key)
-            new_edit.put()
+            allDrawings = Drawing.query().fetch()
+            drawings = []
+            for drawin in allDrawings:
+                if drawin.content == new_drawing.content:
+                    drawings.append(drawin)
+            if drawings:
+                new_drawing = drawings[0]
+                threads = Thread.query().fetch()
+                for threadD in threads:
+                    if new_drawing.key in threadD.drawings:
+                        thread = threads[0]
+                new_edit = Edit.query().filter(Edit.addition == new_drawing.key).fetch()[0]
+            else:
+                content_key = new_drawing.put()
+                thread.drawings.append(content_key)
+                thread_key = thread.put()
+                new_edit = Edit(user=teleUser.key,thread=thread_key,addition=content_key)
+                new_edit.put()
             confirmation_newThread_template = the_jinja_env.get_template("confirmation-newthread.html")
             self.response.write(confirmation_newThread_template.render({
                 "user_info":user,
