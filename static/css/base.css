@@ -25,6 +25,7 @@ body {
   object-fit: cover;
   object-position: center;
   width:inherit;
+  height: 100%;
   /* align-self: flex-start; */
 }
 

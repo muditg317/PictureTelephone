@@ -25,7 +25,7 @@ class SeedDB(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ("/", BasePage),
     ("/bail", BailPage),
-    ("/seed-db",SeedDB),
+    # ("/seed-db",SeedDB),
     ("/confirmation",ConfirmationPage),
     ("/confirmation-newthread",ConfirmationNewThreadPage),
     ("/create", CreatePage),
