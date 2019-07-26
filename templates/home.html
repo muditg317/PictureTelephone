@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="../static/css/home.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
 {% endblock %}
 
 {% block title_block %}
@@ -21,7 +22,7 @@
             thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
             {% set editList = edits_by_thread[thread.key.id()|string] %}
             {% set edit_list = editList[editList|length-1:editList|length] %}
-            {% include "thread.html" %}
+            {% include "threadDisplay.html" %}
           </div>
         {% endfor %}
       </figure>

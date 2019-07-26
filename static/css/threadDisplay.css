@@ -1,0 +1,20 @@
+.thread_display, .edit_display {
+  box-sizing: border-box;
+  border-color: black;
+  border-width: thick;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  width: fit-content;
+}
+
+.thread_display {
+  background-color: blue;
+}
+
+.edit_display {
+  background-color: lightblue;
+}

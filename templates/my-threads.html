@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="../static/css/my-threads.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
 {% endblock %}
 
 {% block title_block %}
@@ -18,7 +19,7 @@
         <h2>Bailed threads:</h2>
         {% for thread in bailed_threads %}
           {% set edit_list = edits_by_thread[thread.key.id()|string] %}
-          {% include "thread.html" %}
+          {% include "threadDisplay.html" %}
         {% endfor %}
       </div>
     {% endif %}
@@ -28,7 +29,7 @@
       {% for thread in user_threads %}
         {% set editList = edits_by_thread[thread.key.id()|string] %}
         {% set edit_list = editList[editList|length-1:editList|length] %}
-        {% include "thread.html" %}
+        {% include "threadDisplay.html" %}
         {% if edit_list[0].user != user_info.key %}
           <a href="/edit?key={{thread.key.id()}}">contribute!</a>
         {% endif %}

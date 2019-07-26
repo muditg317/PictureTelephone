@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="../static/css/confirmation-newThread.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
 {% endblock %}
 
 {% block title_block %}
@@ -13,7 +14,7 @@
 
 {% block pageContent %}
   {% set edit_list = [new_edit] %}
-  {% include "thread.html" %}
+  {% include "threadDisplay.html" %}
   <button type="button" name="goHome" onclick="window.location.href='/home'">Done!</button>
 {% endblock %}
 
