@@ -29,12 +29,11 @@
     </div>
   {% elif user_info.bailOuts|length != 0 %}
     <h3>Uh oh! You've bailed on all the threads!</h3>
-    <p>Check out the <a href="/my-threads">My Threads</a> tab!</p>
+    <p>View them in the <a href="/my-threads">My Threads</a> tab!</p>
   {% else %}
     <h3>There are no threads! How sad :(</h3>
     <p>Click the link below to start a new one!</p>
   {% endif %}
-  <a href="/create">Create a new Thread!</a>
 {% endblock %}
 
 {% block scripts %}

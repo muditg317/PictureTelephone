@@ -10,17 +10,15 @@ let storedDrawing;
 let prevX;
 let prevY;
 
+let empty = true;
 
 function drawLineTo(ctx,x,y,size) {
+    empty = false;
     r=0; g=0; b=0; a=255;
 
     ctx.fillStyle = "rgba("+r+","+g+","+b+","+(a/255)+")";
     ctx.lineWidth = size*2;
 
-    // ctx.beginPath();
-    // ctx.arc(x, y, size, 0, Math.PI*2, true);
-    // ctx.closePath();
-    // ctx.fill();
     ctx.beginPath();
     ctx.moveTo(prevX,prevY);
     ctx.lineTo(x,y);
@@ -31,10 +29,8 @@ function drawLineTo(ctx,x,y,size) {
 }
 
 function clearCanvas(canvas,ctx) {
-  // ctx.save();
-  // ctx.setTransform(1,0,0,1,0,0);
+  empty = true;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // ctx.restore();
 }
 
 function sketchpad_mouseDown() {
@@ -84,6 +80,9 @@ function init() {
 }
 
 function saveImage(thread_id) {
+  if(empty){
+    return;
+  }
   drawingUrl = canvas.toDataURL('image/png', 1.0);
   post('/confirmation', {"drawing": drawingUrl,"thread_id":thread_id,"request_type":"drawing"});
 }
