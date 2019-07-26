@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>TeleDrawings</title>
-  </head>
-  <body>
-    <div class="nav_bar">
-      <!--insert teledrawing icon-->
-      <a href="/home">Home</a> <!--tab 1-->
-      <a href="/my-threads">My Threads</a><!--tab 2-->
-      <a href='/rules'>Rules</a>
-      <a href="{{logout_url}}">Log Out</a>
-    </div>
-    <div class='title_block'>
-      <h1>Your Threads!</h1>
-    </div>
-    <div class="main_body">
+{% extends "base.html" %}
+{% block page_title %}My Threads - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/my-threads.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Your Threads!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  {% if bailed_threads|length != 0 or user_threads|length != 0 %}
+    {% if bailed_threads|length != 0 %}
       <div class='bailed_threads'>
         <h2>Bailed threads:</h2>
         {% for thread in bailed_threads %}
@@ -23,15 +21,26 @@
           {% include "thread.html" %}
         {% endfor %}
       </div>
-      <div class="user_threads">
-        <h2>Active Threads:</h2>
-        {% for thread in user_threads %}
-          {% set editList = edits_by_thread[thread.key.id()|string] %}
-          {% set edit_list = editList[editList|length-1:editList|length] %}
-          {% include "thread.html" %}
-          <a href="/bail?key={{thread.key.id()}}">bail out!</a>
-        {% endfor %}
-      </div>
+    {% endif %}
+    {% if user_threads|length != 0 %}
+    <div class="user_threads">
+      <h2>Active Threads:</h2>
+      {% for thread in user_threads %}
+        {% set editList = edits_by_thread[thread.key.id()|string] %}
+        {% set edit_list = editList[editList|length-1:editList|length] %}
+        {% include "thread.html" %}
+        {% if edit_list[0].user != user_info.key %}
+          <a href="/edit?key={{thread.key.id()}}">contribute!</a>
+        {% endif %}
+        <a href="/bail?key={{thread.key.id()}}">bail out!</a>
+      {% endfor %}
     </div>
-  </body>
-</html>
+    {% endif %}
+  {% else %}
+    <h2>Oh my, you haven't done anything!</h2>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/my-threads.js'></script>
+{% endblock %}

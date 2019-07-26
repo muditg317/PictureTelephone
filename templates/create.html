@@ -1,30 +1,24 @@
-<!-- nav bar -->
-<!-- title block: create a new thread! -->
-<!-- canvas object for drawing -->
-<!-- cancel button -->
-<!-- submit button -->
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Create - TeleDrawings</title>
-  </head>
-  <body onload='init()'>
-    <header>
-      <h1>Create Your Own TeleDrawing!</h1>
-    </header>
-    <!-- insert canvas -->
-    <div class='bottom-half' id="Canvas">
-      <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
-      <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
-      <button onClick='saveImage();'>Submit!</button>
-    </div>
-    <!-- file upload for testing -->
-    <!-- <form action="/confirmation-newthread" enctype="multipart/form-data" method="post">
-      <input type="file" name="drawing"/>
-      <input type="submit" value="submit">
-    </form> -->
-    <script src='../static/scripts/create.js'>
-    </script>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block page_title %}Create - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/create.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Create Your Own TeleDrawing!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  <div class='bottom-half' id="Canvas">
+    <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
+    <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
+    <button onClick='saveImage();'>Submit!</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/create.js'></script>
+{% endblock %}

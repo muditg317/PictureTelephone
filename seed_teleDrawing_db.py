@@ -1,4 +1,4 @@
-from models import ThreadContent,Drawing,Caption,TeleUser,Thread,Edit
+from models import *
 
 
 def seed_db():
@@ -15,6 +15,9 @@ def seed_db():
         thread.captions=[]
         thread.drawings=[thread.drawings[0]]
         thread.put()
+    bailOuts = BailOut.query().fetch()
+    for bailOut in bailOuts:
+        bailOut.key.delete()
     teleUsers = TeleUser.query().fetch()
     for teleUser in teleUsers:
         teleUser.bailedThreads = []

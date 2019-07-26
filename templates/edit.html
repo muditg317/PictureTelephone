@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>TeleDrawings</title>
-  </head>
-  <body>
-    <div class="mainBody">
-      <h1>You just edited this thread!</h1>
-      <h4>Thread: {{thread_id}}</h4>
-      {% set kind = edit.addition.kind() %}
-        {% if kind=="Caption"%}
-          <p class="caption">{{kind}}: {{edit.addition.get().content}}</p>
-        {% else %}
-          {{kind}}: <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-        {% endif %}<br>
-      <a href="/bail?key={{thread.key.id()}}">Bail out!</a>
-    </div>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block page_title %}Edit Thread - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/edit.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>You just edited this thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  <h4>Thread: {{thread_id}}</h4>
+  {% include "editDisplay.html" %}
+  <a href="/bail?key={{thread.key.id()}}">Bail out!</a>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/edit.js'></script>
+{% endblock %}

@@ -1,31 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Rules</title>
-  </head>
-  <body>
-    <div class="nav_bar">
-      <!--insert teledrawing icon-->
-      <a href="/home">Home</a> <!--tab 1-->
-      <a href="/my-threads">My Threads</a><!--tab 2-->
-      <a href='/rules'>Rules</a>
-      <a href="{{logout_url}}">Log Out</a>
-    </div>
-    <h2>Rules</h2>
-    <ul>
-      <li>A Thread is a collection of alternating drawings and captions.</li>
-        <ul>
-          <li>Threads start with a drawing</li>
-        </ul>
-      <li>No user may create a drawing to their own caption or vice versa.</li>
+{% extends "base.html" %}
+{% block page_title %}Rules - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/rules.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Rules:</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  <ol>
+    <li>A Thread is a collection of alternating drawings and captions.</li>
       <ul>
-        <li>A user may create more than one post (a drawing or caption) in each thread.</li>
+        <li>Threads start with a drawing</li>
       </ul>
-      <li>If you want to see all the history of a Thread, you have to bail out.</li>
-        <ul>
-          <li>Once you bail there's no way to rejoin.</li>
-        </ul>
+    <li>No user may create a drawing to their own caption or vice versa.</li>
+    <ul>
+      <li>A user may create more than one post (a drawing or caption) in each thread.</li>
     </ul>
-  </body>
-</html>
+    <li>If you want to see all the history of a Thread, you have to bail out.</li>
+      <ul>
+        <li>Once you bail there's no way to rejoin.</li>
+      </ul>
+  </ol>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/rules.js'></script>
+{% endblock %}

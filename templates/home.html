@@ -1,45 +1,41 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>TeleDrawings</title>
-  </head>
-  <body>
-    {% if request == "failed" %}
-      <script>
-        alert("You were too slow! Someone already edited the thread :(")
-      </script>
-    {% endif %}
-    <div class="nav_bar">
-      <!--insert teledrawing icon-->
-      <a href="/home">Home</a> <!--tab 1-->
-      <a href="/my-threads">My Threads</a><!--tab 2-->
-      <a href='/rules'>Rules</a>
-      <a href="{{logout_url}}">Log Out</a>
+{% extends "base.html" %}
+{% block page_title %}TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/home.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Hi, {{user_info.username}}! Choose a Thread</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  {% if threads|length != 0%}
+    <div class='carousel'>
+      <!-- Insert Carosuel Here -->
+      <figure>
+        {% for thread in threads %}
+          <div class="thread">
+            thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
+            {% set editList = edits_by_thread[thread.key.id()|string] %}
+            {% set edit_list = editList[editList|length-1:editList|length] %}
+            {% include "thread.html" %}
+          </div>
+        {% endfor %}
+      </figure>
     </div>
-    <div class='title_block'>
-      <h1>Hi, {{user_info.username}}! Choose a Thread</h1>
-    </div>
-    <div class="main_body">
-      {% if threads|length != 0%}
-        <div class='carousel'>
-          <!-- Insert Carosuel Here -->
-          <figure>
-            {% for thread in threads %}
-              <div class="thread">
-                thread id: <a href="/edit?key={{thread.key.id()}}">{{thread.thread_id}}</a><br>
-                {% set editList = edits_by_thread[thread.key.id()|string] %}
-                {% set edit_list = editList[editList|length-1:editList|length] %}
-                {% include "thread.html" %}
-              </div>
-            {% endfor %}
-          </figure>
-        </div>
-      {% else %}
-        <h3>Uh oh! You've bailed on all the threads!</h3>
-        <p>Check out the <a href="/my-threads">My Threads</a> tab!</p>
-      {% endif %}
-    </div>
-    <a href="/create">Create a new Thread!</a>
-  </body>
-</html>
+  {% elif user_info.bailOuts|length != 0 %}
+    <h3>Uh oh! You've bailed on all the threads!</h3>
+    <p>Check out the <a href="/my-threads">My Threads</a> tab!</p>
+  {% else %}
+    <h3>There are no threads! How sad :(</h3>
+    <p>Click the link below to start a new one!</p>
+  {% endif %}
+  <a href="/create">Create a new Thread!</a>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/home.js'></script>
+{% endblock %}

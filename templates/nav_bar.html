@@ -1,0 +1,6 @@
+<div class="nav_bar">
+  <a {% if active_tab == "home" %}class=active{% endif %} href="/home"><i class="fa fa-fw fa-home"></i> Home</a> <!--tab 1-->
+  <a {% if active_tab == "my threads" %}class=active{% endif %} href="/my-threads"><i class="fa fa-fw fa-user"></i> My Threads</a><!--tab 2-->
+  <a {% if active_tab == "rules" %}class=active{% endif %} href='/rules'><i class="fa fa-fw fa-search"></i> Rules</a>
+  <a href="{{logout_url}}">Log Out</a>
+</div>

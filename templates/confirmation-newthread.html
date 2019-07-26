@@ -1,20 +1,21 @@
-<!-- nav bar -->
-<!-- title block with congrats blah lbah -->
-<!-- previous thread item on left -->
-<!-- their addition on the right -->
-<!-- edit option at bottom right corner of their addition -->
-<!-- confirm button -->
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Congratulations!</title>
-  </head>
-  <body>
-    <div class="new_edit">
-      You just made a thread!<br>
-      <img src="drawings?key={{new_edit.addition.id()}}" alt="{{new_edit.addition.id()}}">
-    </div>
-    <button type="button" name="goHome" onclick="window.location.href='/home'">Submit!</button>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block page_title %}Congratulations! - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/confirmation-newThread.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>You just made a thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  {% set edit_list = [new_edit] %}
+  {% include "thread.html" %}
+  <button type="button" name="goHome" onclick="window.location.href='/home'">Done!</button>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

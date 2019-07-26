@@ -1,33 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>TeleDrawings</title>
-  </head>
-  <body>
-    <div class="nav_bar">
-      <!--insert teledrawing icon-->
-      <a href="/home">Home</a> <!--tab 1-->
-      <a href="/my-threads">My Threads</a><!--tab 2-->
-      <a href='/rules'>Rules</a>
-      <a href="{{logout_url}}">Log Out</a>
-    </div>
-    <div class='title_block'>
-      <h1>The Complete Thread!</h1>
-    </div>
-    <div class="main_body">
-      <div class='carousel'>
-        thread id:{{thread.thread_id}}<br>
-        {% for edit in edits %}
-          {% set kind = edit.addition.kind() %}
-            {{kind}}:
-            {% if kind=="Caption"%}
-              {{edit.addition.get().content}}
-            {% else %}
-              <img src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
-            {% endif %}<br>
-        {% endfor %}
-      </div>
-    </div>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block page_title %}Bail - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/bail.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>The Complete Thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  {% include "thread.html" %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

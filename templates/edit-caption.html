@@ -1,19 +1,25 @@
-<!-- nav bar -->
-<!-- give up button to the left of the image -->
-<!--previous image -->
-<!--form object that lets the user input a caption-->
-<!-- submit button -->
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Edit the Thread</title>
-  </head>
-  <body>
-    <img src="drawings?key={{drawing.key.id()}}">
-    <form action="/confirmation?thread_id={{thread.thread_id}}&request_type=caption" method="post">
-      <input type="text" name="caption" value="">
-      <input type="submit" name="" value="submit">
-    </form>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block page_title %}Edit Thread - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/edit-caption.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Edit this TeleDrawing!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  {% set edit = last_edit %}
+  {% include "editDisplay.html" %}
+  <form action="/confirmation?thread_id={{thread.thread_id}}&request_type=caption" method="post">
+    <textarea name="caption" rows="8" cols="80"></textarea>
+    <input type="submit" name="" value="submit">
+  </form>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/create.js'></script>
+{% endblock %}

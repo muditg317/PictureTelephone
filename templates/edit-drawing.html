@@ -1,24 +1,26 @@
-<!-- nav bar -->
-<!-- give up button to the left of the caption -->
-<!--previous caption -->
-<!--form object that lets the user draw a thing-->
-<!-- submit button -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Edit The Thread</title>
-    <link rel="stylesheet" href="../static/css/edit-drawing.css"/>
-  </head>
-  <body onload="init({{thread.thread_id}})">
-    <div class="top-half" id='caption'>
-      {{caption.content}}
-    </div>
-    <div class='bottom-half' id="Canvas">
-      <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
-      <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
-      <button onClick='saveImage();'>Submit!</button>
-    </div>
-    <script src='../static/scripts/edit-drawing.js'>
-    </script>
-</body>
-</html>
+{% extends "base.html" %}
+{% block page_title %}Edit Thread - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/edit-drawing.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Edit this TeleDrawing!</h1>
+{% endblock %}
+
+{% block background_imgURL %}{% endblock %}
+
+{% block pageContent %}
+  {% set edit = last_edit %}
+  {% include "editDisplay.html" %}
+  <div class='bottom-half' id="Canvas">
+    <input type="submit" value="Clear" onclick="clearCanvas(canvas,ctx);">
+    <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
+    <button onClick='saveImage({{thread.thread_id}});'>Submit!</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/edit-drawing.js'></script>
+{% endblock %}

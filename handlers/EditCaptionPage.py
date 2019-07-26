@@ -26,5 +26,6 @@ class EditCaptionPage(webapp2.RequestHandler):
             self.response.write(edit_template.render({
                 "user_info":user,
                 "thread":thread,
+                "last_edit":lastEdit,
                 "drawing":last_drawing
             }))

@@ -39,10 +39,17 @@ class MyThreadsPage(webapp2.RequestHandler):
                                 if edit_entity_list[i] == last_edit_before_bail:
                                     edit_entity_list = edit_entity_list[0:i+1]
                                     break
+                            edits_by_thread[str(thread_key.id())]=edit_entity_list
                             break
                     if not bailed:
-                        user_threads.append(thread)
-                    edits_by_thread[str(thread_key.id())]=edit_entity_list
+                        editedThread = False
+                        for edit in edit_entity_list:
+                            if edit.user == teleUser.key:
+                                editedThread = True
+                                break
+                        if editedThread:
+                            user_threads.append(thread)
+                            edits_by_thread[str(thread_key.id())]=edit_entity_list
             # user_threads.sort(key=lambda x: x.key in teleUser.bailedThreads,reverse=True)
             my_threads_template = the_jinja_env.get_template("my-threads.html")
             self.response.write(my_threads_template.render({

@@ -6,7 +6,6 @@ let imageData2;
 let drawingUrl;
 let storedDrawing;
 
-let thread_id;
 
 let prevX;
 let prevY;
@@ -70,8 +69,8 @@ function getMousePos(e) {
   }
 }
 
-function init(threadId) {
-  thread_id = threadId;
+window.onload=init;
+function init() {
   canvas = document.getElementById('canvas');
 
   if (canvas.getContext)
@@ -84,9 +83,8 @@ function init(threadId) {
   }
 }
 
-function saveImage() {
+function saveImage(thread_id) {
   drawingUrl = canvas.toDataURL('image/png', 1.0);
-  // alert("|"+thread_id+"|");
   post('/confirmation', {"drawing": drawingUrl,"thread_id":thread_id,"request_type":"drawing"});
 }
 

@@ -32,5 +32,5 @@ class BailPage(webapp2.RequestHandler):
                 "user_info":teleUser,
                 "logout_url":users.create_logout_url("/welcome"),
                 "thread":thread,
-                "edits":edit_entity_list,
+                "edit_list":edit_entity_list,
             }))

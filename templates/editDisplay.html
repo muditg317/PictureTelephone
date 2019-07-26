@@ -1,0 +1,6 @@
+{% set kind = edit.addition.kind() %}
+  {% if kind=="Caption"%}
+    <p class="caption">{{kind}} by {{edit.user.get().username}}: {{edit.addition.get().content}}</p>
+  {% else %}
+    {{kind}} by {{edit.user.get().username}}: <img class="drawing" src="drawings?key={{edit.addition.id()}}" alt="{{edit.addition.id()}}">
+  {% endif %}<br>
