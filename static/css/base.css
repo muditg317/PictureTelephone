@@ -24,6 +24,7 @@ body {
   overflow: hidden;
   object-fit: cover;
   object-position: center;
+  width:inherit;
   /* align-self: flex-start; */
 }
 

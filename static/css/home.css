@@ -6,3 +6,7 @@
 #visit_mythread:hover {
   color: #8DAD53;
 }
+
+#mainBodyBkgdImg{
+  width: inherit;
+}

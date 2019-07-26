@@ -30,3 +30,7 @@
 #mainBodyBkgdImg{
   width: inherit;
 }
+
+.mainContent {
+  background-color: white;
+}
