@@ -17,27 +17,27 @@
     {% if bailed_threads|length != 0 %}
       <div class='bailed_threads'>
         <h2>Bailed threads:</h2>
-        {% for thread in bailed_threads %}
-          {% set edit_list = edits_by_thread[thread.key.id()|string] %}
-          {% include "threadDisplay.html" %}
-        {% endfor %}
+        <div class="thread_list">
+          {% for thread in bailed_threads %}
+            {% set edit_list = edits_by_thread[thread.key.id()|string] %}
+            {% include "threadDisplay.html" %}
+          {% endfor %}
+        </div>
       </div>
     {% endif %}
     {% if user_threads|length != 0 %}
     <div class="user_threads">
       <h2>Active Threads:</h2>
-      {% for thread in user_threads %}
-        {% set onclick_used = True %}
-        {% set onclick_link = "/edit?key="+thread.key.id()|string %}
-        {% set canBail = True %}
-        {% set editList = edits_by_thread[thread.key.id()|string] %}
-        {% set edit_list = editList[editList|length-1:editList|length] %}
-        {% include "threadDisplay.html" %}
-        <!-- {% if edit_list[0].user != user_info.key %}
-          <a href="/edit?key={{thread.key.id()}}">contribute!</a>
-        {% endif %} -->
-        <!-- <a href="/bail?key={{thread.key.id()}}">bail out!</a> -->
-      {% endfor %}
+      <div class="thread_list">
+        {% for thread in user_threads %}
+          {% set onclick_used = True %}
+          {% set onclick_link = "/edit?key="+thread.key.id()|string %}
+          {% set canBail = True %}
+          {% set editList = edits_by_thread[thread.key.id()|string] %}
+          {% set edit_list = editList[editList|length-1:editList|length] %}
+          {% include "threadDisplay.html" %}
+        {% endfor %}
+      </div>
     </div>
     {% endif %}
   {% else %}
