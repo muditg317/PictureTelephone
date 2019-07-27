@@ -3,6 +3,7 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  padding-top: 15px;
 }
 
 
@@ -27,4 +28,5 @@
 
 #mainBodyBkgdImg{
   width: inherit;
+  height: 800px;
 }

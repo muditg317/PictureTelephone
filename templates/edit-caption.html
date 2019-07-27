@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title_block %}
-<h1>Edit this TeleDrawing!</h1>
+<h1>Edit this Thread!</h1>
 {% endblock %}
 
 {% block background_imgURL %}../static/images/paperLines.png{% endblock %}
@@ -17,7 +17,7 @@
   {% include "editDisplay.html" %}
   <form action="/confirmation?thread_id={{thread.thread_id}}&request_type=caption" method="post">
     <textarea name="caption" rows="8" cols="80"></textarea>
-    <input type="submit" name="" value="submit">
+    <input type="submit" name="" value="Submit">
   </form>
 {% endblock %}
 

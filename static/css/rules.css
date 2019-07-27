@@ -1,11 +1,13 @@
 #title {
   font-size: 70px;
   font-weight: bold;
+  text-align: center;
 }
 
 #secondTitle {
   font-size: 70px;
   font-weight: bold;
+  text-align: center;
 }
 
 #list {
@@ -15,22 +17,44 @@
 
 .title_block{
   height: 100px;
+  text-align: center;
 }
 
 #paragraph {
   font-size: 27px;
   margin-top: 0px;
+  text-align: center;
 }
 
 #intro {
   font-size: 29px;
   margin-top: 0px;
+  text-align: center;
 }
 
 #mainBodyBkgdImg{
   width: inherit;
+  /* max-height: 90vw; */
+
 }
 
-.mainContent {
+.mainContent2 {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 700px;
   background-color: white;
+}
+
+/* body {
+  background-color: black;
+} */
+
+.example {
+  max-width: 50%;
+  height: auto;
+}
+
+#one {
+  display: flex;
+  flex-flow: row;
 }
