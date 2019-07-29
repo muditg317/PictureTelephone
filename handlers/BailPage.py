@@ -25,12 +25,12 @@ class BailPage(webapp2.RequestHandler):
             edit_entity_list = Edit.query().filter(Edit.thread==thread_key).fetch()
             edit_entity_list.sort(key=lambda x: x.addition.get().date)
             new_bailOut = BailOut(thread=thread_key,last_edit=edit_entity_list[-1].key)
-            bailOuts = BailOut.query().filter(BailOut.thread==thread_key).fetch();
-            if bailOuts:
-                pass# new_bailOut = bailOuts[0]
-            else:
-                teleUser.bailOuts.append(new_bailOut.put())
-                teleUser.put()
+            # bailOuts = BailOut.query().filter(BailOut.thread==thread_key).fetch();
+            # if bailOuts:
+            #     pass# new_bailOut = bailOuts[0]
+            # else:
+            teleUser.bailOuts.append(new_bailOut.put())
+            teleUser.put()
             bail_template = the_jinja_env.get_template("bail.html")
             self.response.write(bail_template.render({
                 "user_info":teleUser,
