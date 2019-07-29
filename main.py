@@ -36,5 +36,5 @@ app = webapp2.WSGIApplication([
     ('/edit-drawing', EditDrawingPage),
     ('/edit-caption', EditCaptionPage),
     ("/drawings",DrawingsHandler),
-    ("/rules",RulesPage),
+    ("/about",RulesPage),
 ], debug=True)

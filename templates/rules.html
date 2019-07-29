@@ -7,13 +7,57 @@
 {% endblock %}
 
 {% block title_block %}
-<h1 id='title'>Rules</h1>
+<h1 id='title'>About TeleDrawings</h1>
 {% endblock %}
 
 {% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
 
 {% block pageContent %}
 <div class="mainContent2">
+<h1 id='thirdTitle'>Meet The Creators</h1>
+  <div class="creators">
+    <div class="container">
+      <img src="../static/images/mudit.png" alt="Avatar" class="image">
+      <div class="overlay">
+        <div class="text">
+          Heyo! I’m Mudit and I love robots and coding<br>
+          and AI and pretty much anything fun :)<br>
+          I’ll be majoring in CS at GT next year!
+        </div>
+      </div>
+    </div>
+    <div class="container2">
+      <img src="../static/images/erica.png" alt="Avatar" class="image2">
+      <div class="overlay2">
+        <div class="text2">
+          Hey everyone! I’m Erica and I love music, cats,<br>
+          arts & crafts, and coding. I’m going<br>
+          to Georgia Tech this fall and majoring in CS!
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1 id='secondTitle'>So, What's The Point?</h1>
+  <h4 id='intro'>  Drawing with a mouse is hard.<br>Drawing with only written directions is hard, too.</h4>
+  <p id='paragraph'>
+    <!-- That is what inspires our game. Sometimes there's nothing more fun than silly misunderstandings. -->
+    Now, imagine recreating someone's drawing, with a mouse, no eraser, and a third person's description.
+    This usually leads to an end result that looks nothing like the original work, but don't worry, becuase that's
+    the point of TeleDrawings. Every addition to a thread leads farther and farther away from the original, but gives
+    us more fun along the way.
+  <br>
+  <br>
+    You don't have to be able to draw in order to play, becuase the draiwngs that lead to funnier threads
+    arent't necessarily the ones with better technique. What's even better is that you don't even have to know what you're
+    drawing, becuase describing it is someone else's job. There are no right answers and no points, so it's not a competition.
+    Just have fun and don't be worried of getting something 'wrong'.
+  <br>
+  <br>
+    We hope you enjoy
+  <br>
+    -Mudit and Erica
+  </p>
+  <h1 id='secondTitle'>Rules</h1>
   <ol id='list'>
     <li>A Thread is a collection of alternating drawings and captions.</li>
       <ul>
@@ -28,32 +72,13 @@
         <li>Once you bail there's no way to rejoin.</li>
       </ul>
   </ol>
-    <h1 id='secondTitle'>So, What's The Point?</h1>
-    <h4 id='intro'>  Drawing with a mouse is hard.<br>Drawing with only written directions is hard, too.</h4>
-    <p id='paragraph'>
-      <!-- That is what inspires our game. Sometimes there's nothing more fun than silly misunderstandings. -->
-      Now, imagine recreating someone's drawing, with a mouse, no eraser, and a third person's description.
-      This usually leads to an end result that looks nothing like the original work, but don't worry, becuase that's
-      the point of TeleDrawings. Every addition to a thread leads farther and farther away from the original, but gives
-      us more fun along the way.
-    <br>
-    <br>
-      You don't have to be able to draw in order to play, becuase the draiwngs that lead to funnier threads
-      arent't necessarily the ones with better technique. What's even better is that you don't even have to know what you're
-      drawing, becuase describing it is someone else's job. There are no right answers and no points, so it's not a competition.
-      Just have fun and don't be worried of getting something 'wrong'.
-    <br>
-    <br>
-      We hope you enjoy
-    <br>
-      -Mudit and Erica
-    </p>
     <h1 id='secondTitle'>Here's Some Examples</h1>
     <p>Insert Scanned Image Here</p>
     <div id='one'>
       <img class="example" id='one' src='../static/images/examples.jpg'>
       <img class="example" id='two' src='../static/images/examples_1.jpg'>
     </div>
+
 
 </div>
 {% endblock %}
