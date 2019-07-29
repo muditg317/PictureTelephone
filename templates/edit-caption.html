@@ -16,7 +16,7 @@
   {% set edit = last_edit %}
   {% include "editDisplay.html" %}
   <form action="/confirmation?thread_id={{thread.thread_id}}&request_type=caption" method="post">
-    <textarea name="caption" rows="8" cols="80"></textarea>
+    <textarea name="caption" rows="8" cols="80" required></textarea>
     <input type="submit" name="" value="Submit">
   </form>
 {% endblock %}
