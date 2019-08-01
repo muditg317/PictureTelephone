@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block page_title %}Bail - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/bail.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>The Complete Thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
+
+{% block pageContent %}
+  {% include "threadDisplay.html" %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

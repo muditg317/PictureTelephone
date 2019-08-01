@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block page_title %}My Threads - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/my-threads.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Your Threads!</h1>
+{% endblock %}
+
+{% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
+
+{% block pageContent %}
+  {% if bailed_threads|length != 0 or user_threads|length != 0 %}
+    {% if bailed_threads|length != 0 %}
+      <div class='bailed_threads'>
+        <h2>Bailed threads:</h2>
+        <div class="thread_list">
+          {% for thread in bailed_threads %}
+            {% set edit_list = edits_by_thread[thread.key.id()|string] %}
+            {% include "threadDisplay.html" %}
+            <div class="vert_divider" style="min-width: 20px;">
+
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    {% if user_threads|length != 0 %}
+    <div class="user_threads">
+      <h2>Active Threads:</h2>
+      <div class="thread_list">
+        {% for thread in user_threads %}
+          {% set onclick_used = True %}
+          {% set onclick_link = "/edit?key="+thread.key.id()|string %}
+          {% set canBail = True %}
+          {% set editList = edits_by_thread[thread.key.id()|string] %}
+          {% set edit_list = editList[editList|length-1:editList|length] %}
+          {% include "threadDisplay.html" %}
+          <div class="vert_divider" style="min-width: 20px;">
+
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% else %}
+    <h2>Oh my, you haven't done anything!</h2>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/my-threads.js'></script>
+{% endblock %}

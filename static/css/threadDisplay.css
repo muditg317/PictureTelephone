@@ -1,0 +1,135 @@
+.thread_list {
+  height: 790px;
+  min-width: 700px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: scroll;
+
+  .thread_display {
+    flex: 0 0 auto;
+    display: block;
+    margin: 20px;
+  }
+}
+
+.thread_display {
+  min-width: 630px;
+  box-sizing: border-box;
+  border-color: black;
+  border-width: thick;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  width: 700px;
+  height: min-content;
+  border-style: solid;
+  /* margin-left: 20px; */
+}
+
+.thread_display > header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.thread_display > header > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.length_bailOut {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.length_bailOut > * {
+  padding: 0px 10px;
+}
+
+.thread_display > * {
+  width: 100%;
+}
+
+.thread_display:hover {
+  box-shadow: 5px 5px rgba(0,0,0,0.5);
+}
+
+#thread_label {
+  align-self: flex-end;
+}
+
+#bail_out {
+  height: 30px;
+  padding: 0px 10px;
+  color: black;
+  font-family: roboto;
+  /* font-weight: bold; */
+  font-size: 16px;
+  background-color: rgba(255,255,255,0);
+  border-radius: 15px;
+  border-color: black;
+  border-width: 1px;
+}
+
+#bail_out:hover {
+  background-color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.5);
+  border-color: rgba(0,0,0,0.5);
+}
+
+.edit_display {
+  border-radius: 10px;
+}
+
+.edit_display.caption {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+}
+
+.edit_display:hover {
+  background-color: rgba(0,0,0,0.03);
+}
+
+.caption {
+  text-align: center;
+}
+
+.drawing {
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+}
+
+.drawing_img {
+  margin-bottom: 12px;
+}
+
+.divider {
+  align-self: center;
+  width: 75%;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  /* margin-top: 3px;
+  margin-bottom: 3px; */
+}
+
+.divider:first-child {
+  margin-top: 0;
+}
+
+.divider:last-child {
+  margin-bottom: 0;
+  border-top-style: none;
+}
+
+#mainBodyBkgdImg{
+  width: inherit;
+}

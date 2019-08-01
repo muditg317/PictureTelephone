@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block page_title %}Create - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/create.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>Create Your Own TeleDrawing!</h1>
+{% endblock %}
+
+{% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
+
+{% block pageContent %}
+  <div class='bottom-half' id="Canvas">
+    <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
+    <div class="create_buttons">
+      <button id="clearCanvas" onclick="clearCanvas(canvas,ctx);">Clear</button>
+      <button id="saveCanvas" onClick='saveImage();'>Submit!</button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/create.js'></script>
+{% endblock %}

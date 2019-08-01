@@ -9,14 +9,28 @@ class Drawing(ThreadContent):
 class Caption(ThreadContent):
     content = ndb.StringProperty(required=True)
 
-class User(ndb.Model):
-    username = ndb.StringProperty(required=True)
-
 class Thread(ndb.Model):
     thread_id = ndb.IntegerProperty(required=True)
-    drawings = ndb.KeyProperty(Drawing,required=True,repeated=True)
-    captions = ndb.KeyProperty(Caption,required=True,repeated=True)
+    drawings = ndb.KeyProperty(Drawing,repeated=True)
+    captions = ndb.KeyProperty(Caption,repeated=True)
+
+class BailOut(ndb.Model):
+    thread = ndb.KeyProperty(Thread,required=True)
+    last_edit = ndb.KeyProperty(required=True)
+
+class TeleUser(ndb.Model):
+    username = ndb.StringProperty(required=True)
+    # email = ndb.StringProperty(required=True)
+    bailOuts = ndb.KeyProperty(BailOut,repeated=True)
+
+    @staticmethod
+    def fromGSI(user):
+        email = user.nickname()
+        username = email#[:email.index("@")]
+        teleUser = TeleUser(username=username,id=user.user_id())
+        return teleUser
 
 class Edit(ndb.Model):
-    addtion = ndb.KeyProperty(ThreadContent)
-    user = ndb.KeyProperty(User)
+    user = ndb.KeyProperty(TeleUser,required=True)
+    thread = ndb.KeyProperty(Thread,required=True)
+    addition = ndb.KeyProperty(required=True)

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block page_title %}Edit Confirmation - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/confirmation.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>You just edited a thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
+
+{% block pageContent %}
+  <div class="previous_edit">
+    Thread state:<br>
+    {% set edit = last_edit %}
+    {% include "editDisplay.html" %}
+  </div>
+  <div class="new_edit">
+    Your addition:<br>
+    {% set edit = new_edit %}
+    {% include "editDisplay.html" %}
+  </div>
+  <button type="button" name="goHome" onclick="window.location.href='/home'">Done!</button>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

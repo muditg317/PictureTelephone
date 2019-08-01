@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block page_title %}Edit Thread - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/edit.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>You just edited this thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
+
+{% block pageContent %}
+  {% set canBail = True %}
+  {% set edit_list = [edit] %}
+  {% include "threadDisplay.html" %}
+  <!-- <a href="/bail?key={{thread.key.id()}}">Bail out!</a> -->
+{% endblock %}
+
+{% block scripts %}
+<script src='../static/scripts/edit.js'></script>
+{% endblock %}

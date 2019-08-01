@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block page_title %}Congratulations! - TeleDrawings{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/css/confirmation-newThread.css">
+<link rel="stylesheet" href="../static/css/threadDisplay.css">
+{% endblock %}
+
+{% block title_block %}
+<h1>You just made a thread!</h1>
+{% endblock %}
+
+{% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
+
+{% block pageContent %}
+  {% set edit_list = [new_edit] %}
+  {% include "threadDisplay.html" %}
+  <button type="button" name="goHome" onclick="window.location.href='/home'">Done!</button>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
