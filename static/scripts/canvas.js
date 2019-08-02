@@ -79,6 +79,7 @@ function handleStart(evt) {
       ongoingTouches.push(copyTouch(touches[i]));
       let color = colorForTouch(touches[i]);
       ctx.beginPath();
+      empty = false;
       ctx.arc(touches[i].clientX - offset.x, touches[i].clientY - offset.y, 2, 0, 2 * Math.PI, false); // a circle at the start
       ctx.fillStyle = color;
       ctx.fill();
