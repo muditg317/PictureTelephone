@@ -1,161 +1,160 @@
-let canvas,ctx;
-let mouseX,mouseY,mouseDown=0;
+let canvas, ctx;
+let mouseX, mouseY, mouseDown = 0;
 
 let prevX;
 let prevY;
 
 let empty = true;
 
-function drawLineTo(ctx,x,y,size) {
-    empty = false;
-    r=0; g=0; b=0; a=255;
+function drawLineTo(ctx, x, y, size) {
+  empty = false;
+  r = 0;
+  g = 0;
+  b = 0;
+  a = 255;
 
-    ctx.fillStyle = "rgba("+r+","+g+","+b+","+(a/255)+")";
-    ctx.lineWidth = size*2;
+  ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + (a / 255) + ")";
+  ctx.lineWidth = size * 2;
 
-    ctx.beginPath();
-    ctx.moveTo(prevX,prevY);
-    ctx.lineTo(x,y);
-    ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(prevX, prevY);
+  ctx.lineTo(x, y);
+  ctx.stroke();
 
-    prevX = x;
-    prevY = y;
+  prevX = x;
+  prevY = y;
 }
 
-function clearCanvas(canvas,ctx) {
+function clearCanvas(canvas, ctx) {
   empty = true;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function sketchpad_mouseDown() {
-    mouseDown=1;
-    prevX = mouseX;
-    prevY = mouseY;
-    drawLineTo(ctx,mouseX,mouseY,2);
+  mouseDown = 1;
+  prevX = mouseX;
+  prevY = mouseY;
+  drawLineTo(ctx, mouseX, mouseY, 2);
 }
 
 function sketchpad_mouseUp() {
-    mouseDown=0;
+  mouseDown = 0;
 }
 
 function sketchpad_mouseMove(e) {
   getMousePos(e);
-  if (mouseDown==1) {
-    drawLineTo(ctx,mouseX,mouseY,2);
+  if (mouseDown == 1) {
+    drawLineTo(ctx, mouseX, mouseY, 2);
   }
 }
 
 function getMousePos(e) {
-  console.log(e);
   if (!e)
     var e = event;
 
   if (e.offsetX) {
     mouseX = e.offsetX;
     mouseY = e.offsetY;
-  }
-  else if (e.layerX) {
+  } else if (e.layerX) {
     mouseX = e.layerX;
     mouseY = e.layerY;
   }
 }
 
-window.onload=init;
+window.onload = init;
 
 let ongoingTouches = new Array;
+
 function handleStart(evt) {
 
 
-//  log("touchstart.");
-  let el = document.getElementsByTagName("canvas")[0];
-  let ctx = el.getContext("2d");
   let touches = evt.changedTouches;
-  let offset = findPos(el);
+  let offset = findPos(canvas);
 
 
   for (let i = 0; i < touches.length; i++) {
-      if(touches[i].clientX-offset.x >0 && touches[i].clientX-offset.x < parseFloat(el.width) && touches[i].clientY-offset.y >0 && touches[i].clientY-offset.y < parseFloat(el.height)){
-            evt.preventDefault();
-    log("touchstart:" + i + "...");
-    ongoingTouches.push(copyTouch(touches[i]));
-    let color = colorForTouch(touches[i]);
-    ctx.beginPath();
-    ctx.arc(touches[i].clientX-offset.x, touches[i].clientY-offset.y, 4, 0, 2 * Math.PI, false); // a circle at the start
-    ctx.fillStyle = color;
-    ctx.fill();
-    log("touchstart:" + i + ".");
-  }
+    if (touches[i].clientX - offset.x > 0 && touches[i].clientX - offset.x < parseFloat(canvas.width) && touches[i].clientY - offset.y > 0 && touches[i].clientY - offset.y < parseFloat(canvas.height)) {
+      // evt.preventDefault();
+      //console.log("touchstart:" + i + "...");
+      ongoingTouches.push(copyTouch(touches[i]));
+      let color = colorForTouch(touches[i]);
+      ctx.beginPath();
+      ctx.arc(touches[i].clientX - offset.x, touches[i].clientY - offset.y, 2, 0, 2 * Math.PI, false); // a circle at the start
+      ctx.fillStyle = color;
+      ctx.fill();
+      //console.log("touchstart:" + i + ".");
+    }
   }
 }
+
 function handleMove(evt) {
 
-  let el = document.getElementsByTagName("canvas")[0];
-  let ctx = el.getContext("2d");
   let touches = evt.changedTouches;
-  let offset = findPos(el);
+  let offset = findPos(canvas);
 
   for (let i = 0; i < touches.length; i++) {
-        if(touches[i].clientX-offset.x >0 && touches[i].clientX-offset.x < parseFloat(el.width) && touches[i].clientY-offset.y >0 && touches[i].clientY-offset.y < parseFloat(el.height)){
-              evt.preventDefault();
+    if (touches[i].clientX - offset.x > 0 && touches[i].clientX - offset.x < parseFloat(canvas.width) && touches[i].clientY - offset.y > 0 && touches[i].clientY - offset.y < parseFloat(canvas.height)) {
+      // evt.preventDefault();
       let color = colorForTouch(touches[i]);
-    let idx = ongoingTouchIndexById(touches[i].identifier);
+      let idx = ongoingTouchIndexById(touches[i].identifier);
 
-    if (idx >= 0) {
-      log("continuing touch " + idx);
-      ctx.beginPath();
-      log("ctx.moveTo(" + ongoingTouches[idx].clientX + ", " + ongoingTouches[idx].clientY + ");");
-      ctx.moveTo(ongoingTouches[idx].clientX-offset.x, ongoingTouches[idx].clientY-offset.y);
-      log("ctx.lineTo(" + touches[i].clientX + ", " + touches[i].clientY + ");");
-      ctx.lineTo(touches[i].clientX-offset.x, touches[i].clientY-offset.y);
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = color;
-      ctx.stroke();
+      if (idx >= 0) {
+        //console.log("continuing touch " + idx);
+        ctx.beginPath();
+        //console.log("ctx.moveTo(" + ongoingTouches[idx].clientX + ", " + ongoingTouches[idx].clientY + ");");
+        ctx.moveTo(ongoingTouches[idx].clientX - offset.x, ongoingTouches[idx].clientY - offset.y);
+        //console.log("ctx.lineTo(" + touches[i].clientX + ", " + touches[i].clientY + ");");
+        ctx.lineTo(touches[i].clientX - offset.x, touches[i].clientY - offset.y);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = color;
+        ctx.stroke();
 
-      ongoingTouches.splice(idx, 1, copyTouch(touches[i])); // swap in the new touch record
-      log(".");
-    } else {
-      log("can't figure out which touch to continue");
+        ongoingTouches.splice(idx, 1, copyTouch(touches[i])); // swap in the new touch record
+        //console.log(".");
+      } else {
+        //console.log("can't figure out which touch to continue");
+      }
     }
   }
-        }
 }
+
 function handleEnd(evt) {
 
-//  log("touchend/touchleave.");
-  let el = document.getElementsByTagName("canvas")[0];
-  let ctx = el.getContext("2d");
+  //  console.log("touchend/touchleave.");
   let touches = evt.changedTouches;
-  let offset = findPos(el);
+  let offset = findPos(canvas);
 
   for (let i = 0; i < touches.length; i++) {
-              if(touches[i].clientX-offset.x >0 && touches[i].clientX-offset.x < parseFloat(el.width) && touches[i].clientY-offset.y >0 && touches[i].clientY-offset.y < parseFloat(el.height)){
-                    evt.preventDefault();
-    let color = colorForTouch(touches[i]);
-    let idx = ongoingTouchIndexById(touches[i].identifier);
+    if (touches[i].clientX - offset.x > 0 && touches[i].clientX - offset.x < parseFloat(canvas.width) && touches[i].clientY - offset.y > 0 && touches[i].clientY - offset.y < parseFloat(canvas.height)) {
+      // evt.preventDefault();
+      let color = colorForTouch(touches[i]);
+      let idx = ongoingTouchIndexById(touches[i].identifier);
 
-    if (idx >= 0) {
-      ctx.lineWidth = 4;
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(ongoingTouches[idx].clientX-offset.x, ongoingTouches[idx].clientY-offset.y);
-      ctx.lineTo(touches[i].clientX-offset.x, touches[i].clientY-offset.y);
-      ctx.fillRect(touches[i].clientX - 4-offset.x, touches[i].clientY - 4-offset.y, 8, 8); // and a square at the end
-      ongoingTouches.splice(i, 1); // remove it; we're done
-    } else {
-      log("can't figure out which touch to end");
+      if (idx >= 0) {
+        ctx.lineWidth = 4;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(ongoingTouches[idx].clientX - offset.x, ongoingTouches[idx].clientY - offset.y);
+        ctx.lineTo(touches[i].clientX - offset.x, touches[i].clientY - offset.y);
+        // ctx.fillRect(touches[i].clientX - 4 - offset.x, touches[i].clientY - 4 - offset.y, 4, 4); // and a square at the end
+        ongoingTouches.splice(i, 1); // remove it; we're done
+      } else {
+        //console.log("can't figure out which touch to end");
+      }
     }
   }
-        }
 }
+
 function handleCancel(evt) {
-  evt.preventDefault();
-  log("touchcancel.");
+  // evt.preventDefault();
+  //console.log("touchcancel.");
   let touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {
     ongoingTouches.splice(i, 1); // remove it; we're done
   }
 }
+
 function colorForTouch(touch) {
   let r = touch.identifier % 16;
   let g = Math.floor(touch.identifier / 3) % 16;
@@ -165,12 +164,18 @@ function colorForTouch(touch) {
   b = b.toString(16); // make it a hex digit
   let color = "#" + r + g + b;
   color = "#000"
-  log("color for touch with identifier " + touch.identifier + " = " + color);
+  //console.log("color for touch with identifier " + touch.identifier + " = " + color);
   return color;
 }
+
 function copyTouch(touch) {
-  return {identifier: touch.identifier,clientX: touch.clientX,clientY: touch.clientY};
+  return {
+    identifier: touch.identifier,
+    clientX: touch.clientX,
+    clientY: touch.clientY
+  };
 }
+
 function ongoingTouchIndexById(idToFind) {
   for (let i = 0; i < ongoingTouches.length; i++) {
     let id = ongoingTouches[i].identifier;
@@ -181,23 +186,22 @@ function ongoingTouchIndexById(idToFind) {
   }
   return -1; // not found
 }
-function log(msg) {
-  let p = document.getElementById('log');
-  p.innerHTML = msg + "\n" + p.innerHTML;
-}
 
-function findPos (obj) {
-    let curleft = 0,
-        curtop = 0;
+function findPos(obj) {
+  let curleft = 0,
+    curtop = 0;
 
-    if (obj.offsetParent) {
-        do {
-            curleft += obj.offsetLeft;
-            curtop += obj.offsetTop;
-        } while (obj = obj.offsetParent);
+  if (obj.offsetParent) {
+    do {
+      curleft += obj.offsetLeft;
+      curtop += obj.offsetTop;
+    } while (obj = obj.offsetParent);
 
-        return { x: curleft-document.body.scrollLeft, y: curtop-document.body.scrollTop };
-    }
+    return {
+      x: curleft - document.body.scrollLeft,
+      y: curtop - document.body.scrollTop
+    };
+  }
 }
 
 function init() {
@@ -220,14 +224,18 @@ function init() {
   }
 }
 
-function saveImage(nextPage,thread_id) {
-  if(!empty){
+function saveImage(nextPage, thread_id) {
+  if (!empty) {
     drawingUrl = canvas.toDataURL('image/png', 1.0);
-    post(nextPage, {"drawing": drawingUrl,"thread_id":thread_id,"request_type":"drawing"});
+    post(nextPage, {
+      "drawing": drawingUrl,
+      "thread_id": thread_id,
+      "request_type": "drawing"
+    });
   }
 }
 
-function post(path, params, method='post') {
+function post(path, params, method = 'post') {
 
   const form = document.createElement('form');
   form.method = method;
