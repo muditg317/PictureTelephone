@@ -74,15 +74,15 @@ function handleStart(evt) {
 
   for (let i = 0; i < touches.length; i++) {
     if (touches[i].clientX - offset.x > 0 && touches[i].clientX - offset.x < parseFloat(canvas.width) && touches[i].clientY - offset.y > 0 && touches[i].clientY - offset.y < parseFloat(canvas.height)) {
-      // evt.preventDefault();
-      //console.log("touchstart:" + i + "...");
+      evt.preventDefault();
+      console.log("touchstart:" + i + "...");
       ongoingTouches.push(copyTouch(touches[i]));
       let color = colorForTouch(touches[i]);
       ctx.beginPath();
       ctx.arc(touches[i].clientX - offset.x, touches[i].clientY - offset.y, 2, 0, 2 * Math.PI, false); // a circle at the start
       ctx.fillStyle = color;
       ctx.fill();
-      //console.log("touchstart:" + i + ".");
+      console.log("touchstart:" + i + ".");
     }
   }
 }
@@ -94,25 +94,25 @@ function handleMove(evt) {
 
   for (let i = 0; i < touches.length; i++) {
     if (touches[i].clientX - offset.x > 0 && touches[i].clientX - offset.x < parseFloat(canvas.width) && touches[i].clientY - offset.y > 0 && touches[i].clientY - offset.y < parseFloat(canvas.height)) {
-      // evt.preventDefault();
+      evt.preventDefault();
       let color = colorForTouch(touches[i]);
       let idx = ongoingTouchIndexById(touches[i].identifier);
 
       if (idx >= 0) {
-        //console.log("continuing touch " + idx);
+        console.log("continuing touch " + idx);
         ctx.beginPath();
-        //console.log("ctx.moveTo(" + ongoingTouches[idx].clientX + ", " + ongoingTouches[idx].clientY + ");");
+        console.log("ctx.moveTo(" + ongoingTouches[idx].clientX + ", " + ongoingTouches[idx].clientY + ");");
         ctx.moveTo(ongoingTouches[idx].clientX - offset.x, ongoingTouches[idx].clientY - offset.y);
-        //console.log("ctx.lineTo(" + touches[i].clientX + ", " + touches[i].clientY + ");");
+        console.log("ctx.lineTo(" + touches[i].clientX + ", " + touches[i].clientY + ");");
         ctx.lineTo(touches[i].clientX - offset.x, touches[i].clientY - offset.y);
         ctx.lineWidth = 4;
         ctx.strokeStyle = color;
         ctx.stroke();
 
         ongoingTouches.splice(idx, 1, copyTouch(touches[i])); // swap in the new touch record
-        //console.log(".");
+        console.log(".");
       } else {
-        //console.log("can't figure out which touch to continue");
+        console.log("can't figure out which touch to continue");
       }
     }
   }
@@ -126,7 +126,7 @@ function handleEnd(evt) {
 
   for (let i = 0; i < touches.length; i++) {
     if (touches[i].clientX - offset.x > 0 && touches[i].clientX - offset.x < parseFloat(canvas.width) && touches[i].clientY - offset.y > 0 && touches[i].clientY - offset.y < parseFloat(canvas.height)) {
-      // evt.preventDefault();
+      evt.preventDefault();
       let color = colorForTouch(touches[i]);
       let idx = ongoingTouchIndexById(touches[i].identifier);
 
@@ -139,15 +139,15 @@ function handleEnd(evt) {
         // ctx.fillRect(touches[i].clientX - 4 - offset.x, touches[i].clientY - 4 - offset.y, 4, 4); // and a square at the end
         ongoingTouches.splice(i, 1); // remove it; we're done
       } else {
-        //console.log("can't figure out which touch to end");
+        console.log("can't figure out which touch to end");
       }
     }
   }
 }
 
 function handleCancel(evt) {
-  // evt.preventDefault();
-  //console.log("touchcancel.");
+  evt.preventDefault();
+  console.log("touchcancel.");
   let touches = evt.changedTouches;
 
   for (let i = 0; i < touches.length; i++) {
@@ -164,7 +164,7 @@ function colorForTouch(touch) {
   b = b.toString(16); // make it a hex digit
   let color = "#" + r + g + b;
   color = "#000"
-  //console.log("color for touch with identifier " + touch.identifier + " = " + color);
+  console.log("color for touch with identifier " + touch.identifier + " = " + color);
   return color;
 }
 
@@ -215,7 +215,7 @@ function init() {
     canvas.addEventListener('mousemove', sketchpad_mouseMove, false);
     window.addEventListener('mouseup', sketchpad_mouseUp, false);
 
-    let el = document.body;
+    let el = canvas;
     el.addEventListener("touchstart", handleStart, false);
     el.addEventListener("touchend", handleEnd, false);
     el.addEventListener("touchcancel", handleCancel, false);
