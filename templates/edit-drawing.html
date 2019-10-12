@@ -4,6 +4,7 @@
 {% block styles %}
 <link rel="stylesheet" href="../static/css/edit-drawing.css">
 <link rel="stylesheet" href="../static/css/threadDisplay.css">
+<link rel="stylesheet" href="../static/css/canvas.css">
 {% endblock %}
 
 {% block title_block %}
@@ -15,15 +16,16 @@
 {% block pageContent %}
   {% set edit = last_edit %}
   {% include "editDisplay.html" %}
-  <div class='bottom-half' id="Canvas">
+  <div class="bottom-half" id="Canvas">
     <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
     <div class="create_buttons">
       <button id="clearCanvas" onclick="clearCanvas(canvas,ctx);">Clear</button>
-      <button id="saveCanvas" onClick='saveImage({{thread.thread_id}});'>Submit!</button>
+      <button id="saveCanvas" onClick="saveImage('/confirmation',{{thread.thread_id}});">Submit!</button>
     </div>
   </div>
 {% endblock %}
 
 {% block scripts %}
-<script src='../static/scripts/edit-drawing.js'></script>
+<script src="../static/scripts/edit-drawing.js"></script>
+<script src="../static/scripts/canvas.js"></script>
 {% endblock %}

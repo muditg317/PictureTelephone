@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="../static/css/create.css">
+<link rel="stylesheet" href="../static/css/canvas.css">
 {% endblock %}
 
 {% block title_block %}
@@ -12,15 +13,16 @@
 {% block background_imgURL %}../static/images/clearSheet.png{% endblock %}
 
 {% block pageContent %}
-  <div class='bottom-half' id="Canvas">
+  <div class="bottom-half" id="Canvas">
     <canvas id="canvas" height="600" width="600" style="border:1px solid #000000;"></canvas>
     <div class="create_buttons">
       <button id="clearCanvas" onclick="clearCanvas(canvas,ctx);">Clear</button>
-      <button id="saveCanvas" onClick='saveImage();'>Submit!</button>
+      <button id="saveCanvas" onClick="saveImage('/confirmation-newthread',0);">Submit!</button>
     </div>
   </div>
 {% endblock %}
 
 {% block scripts %}
-<script src='../static/scripts/create.js'></script>
+<script src="../static/scripts/create.js"></script>
+<script src="../static/scripts/canvas.js"></script>
 {% endblock %}
